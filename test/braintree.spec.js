@@ -10,22 +10,16 @@ const braintreeConfig = {
 };
 
 const Payments = index.Payments(braintreeConfig);
+Payments.connect();
 
 describe('Payments', () => {
-  it('should return gateway object', () => {
-    const result = index.Payments();
-    expect(result).to.be.instanceof(Object);
-  });
-});
-
-describe('Gateway', () => {
   it('should contain config object', () => {
     const config = Payments.getConfig();
     expect(config).to.be.instanceOf(Object);
   });
 });
 
-describe('Gateway config', () => {
+describe('Payments config', () => {
   it('should contain merchantId property', () => {
     const config = Payments.getConfig();
     expect(config).to.have.ownProperty('merchantId');

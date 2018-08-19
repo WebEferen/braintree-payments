@@ -1,0 +1,40 @@
+import IAddOn from './IAddOn';
+import ISubscriptionHistory from './ISubscriptionHistory';
+import ITransaction from './ITransaction';
+
+export default interface ISubscription {
+  id: string;
+  url: string;
+  name: string;
+  phone: string;
+  price: number;
+  status: string;
+  planId: string;
+  balance: string;
+  descriptor: string;
+  description: string;
+  discounts: object[];
+  failureCount: number;
+  trialDuration: number;
+  firstBillingDate: Date;
+  billingDayOfMonth: number;
+  billingPeriodEndDate: Date;
+  billingPeriodStartDate: Date;
+  transactions: ITransaction[];
+  nextBillingPeriodAmount: string;
+  statusHistory: ISubscriptionHistory[];
+  numberOfBillingCycles: number;
+  currentBillingCycle: number;
+  paymentMethodToken: string;
+  trialDurationUnit: string;
+  merchantAccountId: string;
+  nextBillAmount: string;
+  nextBillingDate: Date;
+  paidThroughDate: Date;
+  neverExpires: boolean;
+  totalPeriod: boolean;
+  daysPastDue: Date;
+  createdAt: Date;
+  updatedAt: Date;
+  addOns: IAddOn[];
+}
