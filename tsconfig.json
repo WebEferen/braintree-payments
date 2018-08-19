@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es2015",
     "module": "commonjs",
     "declaration": true,
     "outDir": "./dist",
     "sourceMap": true,
-    "strict": true
+    "strict": true,
+    "typeRoots": ["./typings"],
+    "types": ["node", "lodash"]
   },
   "exclude": [
     "node_modules"

@@ -1,10 +1,11 @@
 import Braintree from './lib/Braintree';
+import IConfig from './lib/interfaces/IConfig';
 
 /**
  * Braintree gateway
- * @param {Object} braintreeConfig - Configuration for the Braintree
+ * @param {IConfig} braintreeConfig - Configuration for the Braintree
  */
-export function Payments(braintreeConfig: object) {
+export function Payments(braintreeConfig: IConfig) {
   const btGateway = new Braintree(braintreeConfig);
   return btGateway;
 }
