@@ -5,8 +5,10 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "npm run build && mocha --reporter spec",
-    "build": "tsc"
+    "tslint": "./node_modules/.bin/tslint -p tsconfig.json",
+    "tslint-fix": "./node_modules/.bin/tslint -p tsconfig.json --fix",
+    "test": "npm run build && ./node_modules/.bin/mocha --reporter spec",
+    "build": "./node_modules/.bin/tsc"
   },
   "repository": {
     "type": "git",
@@ -20,11 +22,13 @@
   "homepage": "https://gitlab.com/WebEferen/braintree-payments#README",
   "dependencies": {
     "braintree": "^2.12.0",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "lodash": "^4.17.10"
   },
   "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^5.2.0",
-    "typescript": "^3.0.1"
+    "typescript": "^3.0.1",
+    "tslint": "^5.11.0"
   }
 }

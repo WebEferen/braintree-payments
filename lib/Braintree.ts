@@ -1,14 +1,15 @@
+// import * as braintree from 'braintree';
+
 export default class Braintree {
 
-  private config : Object;
+  private config: object;
 
-  constructor (config : Object) {
-    this.config = config;
-    return this;
+  constructor(config: object) {
+      this.config = config;
+      return this;
   }
 
   public getConfig() {
-    return <Object>this.config;
+      return this.config as object;
   }
-
 }
