@@ -1,6 +1,5 @@
 'use strict';
 const chai = require('chai');
-const should = chai.should;
 const expect = chai.expect;
 
 const Braintree = require('../dist/index.js');
@@ -17,6 +16,10 @@ const validCustomerObject = {
   lastName: 'Doe',
   email: 'email@example.com',
   phone: '111222333'
+};
+const validCustomerUpdateObject = {
+  firstName: 'Johny',
+  lastName: 'Deep'
 };
 
 describe('Customer', () => {
@@ -35,6 +38,11 @@ describe('Customer', () => {
       expect(result.success).to.be.false;
     });
   });
+  it('should NOT update braintree customer', () => {
+    Customer.update('invalidCustomerId', {}).then(result => {
+      expect(result.success).to.be.false;
+    });
+  });
   it('should NOT remove braintree customer', () => {
     Customer.delete('invalidCustomerId').then(result => {
       expect(result.success).to.be.false;
@@ -50,6 +58,12 @@ describe('Customer', () => {
   });
   it('should get braintree customer', (done) => {
     Customer.find(validCustomerId).then(result => {
+      done();
+      expect(result.success).to.be.true;
+    });
+  });
+  it('should update braintree customer', (done) => {
+    Customer.update(validCustomerId, validCustomerUpdateObject).then(result => {
       done();
       expect(result.success).to.be.true;
     });

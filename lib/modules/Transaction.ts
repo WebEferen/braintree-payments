@@ -1,20 +1,26 @@
+import ITransaction from '../interfaces/ITransaction';
+
 export class Transaction {
 
-  private braintree: any;
+  private transaction: any;
 
-  constructor(braintree: any) {
-    this.braintree = braintree;
+  constructor(transaction: any) {
+    this.transaction = this.transaction;
   }
 
-  public get() {
-    return 'get';
-  }
-
-  public create() {
+  public async create(newTransaction: ITransaction) {
     return 'create';
   }
 
-  public find() {
+  public async find(transactionId: string) {
     return 'find';
+  }
+
+  public async update(transactionId: string, updatedTransaction: ITransaction) {
+    return 'update';
+  }
+
+  public async delete(transactionId: string) {
+    return 'delete';
   }
 }
