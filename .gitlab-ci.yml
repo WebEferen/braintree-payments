@@ -15,3 +15,11 @@ test_deployment:
    - npm run test-build
   tags:
     - docker
+
+test_coverage:
+  stage: test
+  script:
+   - npm install
+   - npm run test-coverage 
+  tags:
+   - docker
