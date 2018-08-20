@@ -41,6 +41,7 @@ export default class Braintree {
   }
 
   public getModule(moduleName: string) {
+      moduleName = moduleName.toLowerCase();
       switch (moduleName) {
         case 'customer':
             return new Customer(this.gateway);
