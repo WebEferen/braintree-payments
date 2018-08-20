@@ -1,7 +1,7 @@
-import Validator from '../helpers/Validator';
 import ICustomer from '../interfaces/ICustomer';
+import CustomerValidator from '../validators/CustomerValidator';
 
-export class Customer {
+export default class CustomerModule {
 
   private customer: any;
 
@@ -14,7 +14,7 @@ export class Customer {
    * @param {ICustomer} customer Customer object
    */
   public async create(newCustomer: ICustomer) {
-    const validator = new Validator(newCustomer, ['id', 'firstName', 'lastName']);
+    const validator = new CustomerValidator(newCustomer);
     if (validator.verify()) {
       try {
         const customer = await this.customer.create(newCustomer);

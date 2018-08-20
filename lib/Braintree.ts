@@ -1,9 +1,9 @@
 import * as braintree from 'braintree';
 
-import { Customer } from './modules/Customer';
-import { Plan } from './modules/Plan';
-import { Subscription } from './modules/Subscription';
-import { Transaction } from './modules/Transaction';
+import CustomerModule from './modules/CustomerModule';
+import PlanModule from './modules/PlanModule';
+import SubscriptionModule from './modules/SubscriptionModule';
+import TransactionModule from './modules/TransactionModule';
 
 import IConfig from './interfaces/IConfig';
 
@@ -55,13 +55,13 @@ export default class Braintree {
 
             switch (moduleName) {
                 case 'customer':
-                    return new Customer(gateway);
+                    return new CustomerModule(gateway);
                 case 'subscription':
-                    return new Subscription(gateway);
+                    return new SubscriptionModule(gateway);
                 case 'plan':
-                    return new Plan(gateway);
+                    return new PlanModule(gateway);
                 case 'transaction':
-                    return new Transaction(gateway);
+                    return new TransactionModule(gateway);
             }
         }
 

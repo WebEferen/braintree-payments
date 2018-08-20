@@ -5,9 +5,13 @@ export default class Validator {
   public verifyPattern: string[];
   public modelToVerify: object;
 
-  constructor(modelToVerify: object, verifyPattern: string[]) {
+  constructor(modelToVerify: object, verifyPattern: string[] = []) {
     this.modelToVerify = modelToVerify;
     this.verifyPattern = verifyPattern;
+  }
+
+  public setVerifyPattern(pattern: string[]) {
+    this.verifyPattern = pattern;
   }
 
   public verify() {

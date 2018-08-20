@@ -1,6 +1,5 @@
 'use strict';
 const chai = require('chai');
-const should = chai.should;
 const expect = chai.expect;
 
 const Braintree = require('../dist/index.js');
@@ -10,7 +9,7 @@ const Payments = Braintree.Payments(braintreeConfig, true);
 const Customer = Payments.getModule('customer');
 
 // Some mockups
-const validCustomerId = "validCustomerId";
+const validCustomerId = 'validCustomerId';
 const validCustomerObject = {
   id: validCustomerId,
   firstName: 'John',
@@ -18,8 +17,31 @@ const validCustomerObject = {
   email: 'email@example.com',
   phone: '111222333'
 };
+const validCustomerUpdateObject = {
+  firstName: 'Johny',
+  lastName: 'Deep'
+};
+
+const validTestCustomerId = 'testCustomerId';
+const validTestCustomer = {
+  id: validTestCustomerId,
+  firstName: 'Test',
+  lastName: 'Customer',
+  email: 'test@test.test',
+  phone: '111222333444'
+};
 
 describe('Customer', () => {
+  before((done) => {
+    Customer.find(validTestCustomerId).then(result => {
+      if (result.success) {
+        Customer.delete(validTestCustomerId).then(result => {
+          done();
+        })
+      }
+    });
+  });
+
   it('should be a module', () => {
     expect(Customer).to.be.instanceOf(Object);
   });
@@ -32,6 +54,11 @@ describe('Customer', () => {
   });
   it('should NOT get braintree customer', () => {
     Customer.find('invalidCustomerId').then(result => {
+      expect(result.success).to.be.false;
+    });
+  });
+  it('should NOT update braintree customer', () => {
+    Customer.update('invalidCustomerId', {}).then(result => {
       expect(result.success).to.be.false;
     });
   });
@@ -54,8 +81,26 @@ describe('Customer', () => {
       expect(result.success).to.be.true;
     });
   });
+  it('should update braintree customer', (done) => {
+    Customer.update(validCustomerId, validCustomerUpdateObject).then(result => {
+      done();
+      expect(result.success).to.be.true;
+    });
+  });
   it('should delete braintree customer', (done) => {
     Customer.delete(validCustomerId).then(result => {
+      done();
+      expect(result.success).to.be.true;
+    });
+  });
+  it('should create braintree TEST customer', (done) => {
+    Customer.create(validTestCustomer).then(result => {
+      done();
+      expect(result.success).to.be.true;
+    });
+  });
+  it('should get braintree TEST customer', (done) => {
+    Customer.find(validTestCustomerId).then(result => {
       done();
       expect(result.success).to.be.true;
     });
