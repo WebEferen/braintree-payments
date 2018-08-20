@@ -13,6 +13,9 @@
     "test-build": "npm run build && npm run mocha",
     "test-production": "npm run tslint && npm test"
   },
+  "engines": {
+    "node": "8.9.4"
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@gitlab.com/WebEferen/braintree-payments.git"
