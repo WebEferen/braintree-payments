@@ -9,7 +9,7 @@ const Payments = Braintree.Payments(braintreeConfig, true);
 const Customer = Payments.getModule('customer');
 
 // Some mockups
-const validCustomerId = "validCustomerId";
+const validCustomerId = 'validCustomerId';
 const validCustomerObject = {
   id: validCustomerId,
   firstName: 'John',
@@ -22,7 +22,26 @@ const validCustomerUpdateObject = {
   lastName: 'Deep'
 };
 
+const validTestCustomerId = 'testCustomerId';
+const validTestCustomer = {
+  id: validTestCustomerId,
+  firstName: 'Test',
+  lastName: 'Customer',
+  email: 'test@test.test',
+  phone: '111222333444'
+};
+
 describe('Customer', () => {
+  before((done) => {
+    Customer.find(validTestCustomerId).then(result => {
+      if (result.success) {
+        Customer.delete(validTestCustomerId).then(result => {
+          done();
+        })
+      }
+    });
+  });
+
   it('should be a module', () => {
     expect(Customer).to.be.instanceOf(Object);
   });
@@ -70,6 +89,18 @@ describe('Customer', () => {
   });
   it('should delete braintree customer', (done) => {
     Customer.delete(validCustomerId).then(result => {
+      done();
+      expect(result.success).to.be.true;
+    });
+  });
+  it('should create braintree TEST customer', (done) => {
+    Customer.create(validTestCustomer).then(result => {
+      done();
+      expect(result.success).to.be.true;
+    });
+  });
+  it('should get braintree TEST customer', (done) => {
+    Customer.find(validTestCustomerId).then(result => {
       done();
       expect(result.success).to.be.true;
     });

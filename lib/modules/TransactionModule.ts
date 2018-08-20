@@ -15,21 +15,30 @@ export default class TransactionModule {
       try {
       const transaction = await this.transaction.sale(newTransaction);
       return transaction as ITransaction;
-      } catch (error) { return {status: false}; }
+      } catch (error) { return {status: false, error}; }
     }
     return {success: false};
   }
 
   public async find(transactionId: string) {
-    return 'find';
+    try {
+      const transaction = await this.transaction.find(transactionId);
+      return {transaction: transaction as ITransaction, success: true};
+    } catch (error) { return {success: false}; }
   }
 
-  public async update(transactionId: string, updatedTransaction: ITransaction) {
-    return 'update';
+  public async refund(transactionId: string) {
+    try {
+      const transaction = await this.transaction.refund(transactionId);
+      return {transaction: transaction as ITransaction, success: true};
+    } catch (error) { return {success: false}; }
   }
 
-  public async delete(transactionId: string) {
-    return 'delete';
+  public async cancelRelease(transactionId: string) {
+    try {
+      const transaction = await this.transaction.cancelRelease(transactionId);
+      return {transaction: transaction as ITransaction, success: true};
+    } catch (error) { return {success: false}; }
   }
 
 }
