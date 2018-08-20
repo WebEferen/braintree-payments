@@ -6,8 +6,8 @@ import IConfig from './lib/interfaces/IConfig';
  * @param {IConfig} braintreeConfig - Configuration for the Braintree
  * @param {Boolean} connect - If true connect to braintree instantly
  */
-export function Payments(braintreeConfig: IConfig, connect: boolean = false) {
+export function Payments(braintreeConfig: IConfig) {
   const btGateway = new Braintree(braintreeConfig);
-  if (connect) { btGateway.connect(); }
+  btGateway.connect();
   return btGateway;
 }

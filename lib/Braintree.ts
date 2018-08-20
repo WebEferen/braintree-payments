@@ -1,8 +1,8 @@
 import * as braintree from 'braintree';
 
 import CustomerModule from './modules/CustomerModule';
-import PlanModule from './modules/PlanModule';
-import SubscriptionModule from './modules/SubscriptionModule';
+// import PlanModule from './modules/PlanModule';
+// import SubscriptionModule from './modules/SubscriptionModule';
 import TransactionModule from './modules/TransactionModule';
 
 import IConfig from './interfaces/IConfig';
@@ -21,8 +21,19 @@ export default class Braintree {
         return this;
     }
 
-    public getConfig(key: string | null = null) {
-        switch ((key) ? key : null) {
+    /**
+     * Connects manually to braintree API
+     */
+    public connect() {
+        this.gateway = braintree.connect(this.config);
+    }
+
+    /**
+     * Gets specific config
+     * @param key Gets config value by key or get all values
+     */
+    public getConfig(key: string) {
+        switch (key) {
             case 'environment':
                 return this.config.environment;
             case 'merchantId':
@@ -36,17 +47,10 @@ export default class Braintree {
         }
     }
 
-    public connect() {
-        if (!this.config) { return false; }
-        this.gateway = braintree.connect(this.config);
-        if (!this.gateway) { return false; }
-        return true;
-    }
-
-    public getGateway() {
-        return this.gateway;
-    }
-
+    /**
+     * Gets module based on the provided name
+     * @param moduleName Name of the module
+     */
     public getModule(moduleName: string) {
         moduleName = moduleName.toLowerCase();
 
@@ -56,15 +60,21 @@ export default class Braintree {
             switch (moduleName) {
                 case 'customer':
                     return new CustomerModule(gateway);
-                case 'subscription':
-                    return new SubscriptionModule(gateway);
-                case 'plan':
-                    return new PlanModule(gateway);
+                // case 'subscription':
+                //     return new SubscriptionModule(gateway);
+                // case 'plan':
+                //     return new PlanModule(gateway);
                 case 'transaction':
                     return new TransactionModule(gateway);
             }
         }
-
         return undefined;
+    }
+
+    /**
+     * Gets into gateway
+     */
+    private getGateway() {
+        return this.gateway;
     }
 }

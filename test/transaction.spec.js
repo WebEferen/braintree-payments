@@ -5,7 +5,7 @@ const expect = chai.expect;
 const Braintree = require('../dist/index.js');
 const braintreeConfig = require('./braintree.config');
 
-const Payments = Braintree.Payments(braintreeConfig, true);
+const Payments = Braintree.Payments(braintreeConfig);
 const Transaction = Payments.getModule('transaction');
 
 // Mockups
@@ -52,27 +52,31 @@ describe('Transaction', () => {
   // Valid
   it('should create braintree transaction', (done) => { 
     Transaction.create(validTransactionObject).then(result => {
+      if(result.error) { done(result.error); }
       validTransactionId = result.transaction.id;
-      done();
       expect(result.success).to.be.true;
-    });
+      done();
+    }).catch(e => { done(e); });
   });
   it('should get braintree transaction', (done) => { 
     Transaction.find(validTransactionId).then(result => {
-      done();
+      if(result.error) { done(result.error); }
       expect(result.success).to.be.true;
-    });
+      done();
+    }).catch(e => { done(e); });
   });
   it('should refund braintree transaction', (done) => {
     Transaction.refund(validTransactionId, validTransactionUpdate).then(result => {
-      done();
+      if(result.error) { done(result.error); }
       expect(result.success).to.be.true;
-    });
+      done();
+    }).catch(e => { done(e); });
   });
   it('should cancel-release braintree transaction', (done) => {
     Transaction.cancelRelease(validTransactionId).then(result => {
-      done();
+      if(result.error) { done(result.error); }
       expect(result.success).to.be.true;
-    });
+      done();
+    }).catch(e => { done(e); });
   });
 });

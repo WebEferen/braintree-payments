@@ -2,41 +2,45 @@
 const expect = require('chai').expect;
 const Braintree = require('../dist/index.js');
 const braintreeConfig = require('./braintree.config.js');
-
-// Payments
 const Payments = Braintree.Payments(braintreeConfig);
-const connected = Payments.connect(braintreeConfig);
-const paymentsConfig = Payments.getConfig();
 
-describe('Payments', () => {
-  it('should contain config object', () => {
-    expect(paymentsConfig).to.be.instanceOf(Object);
+describe('Modules', () => {
+  it('should contain customer module', (done) => {
+    expect(Payments.getModule('customer')).to.be.instanceof(Object);
+    done();
   });
-  it('should connect to the Braintree API', () => {
-    expect(connected).to.be.true;
+  // it('should contain subscription module', (done) => {
+  //   expect(Payments.getModule('subscription')).to.be.instanceof(Object);
+  //   done();
+  // });
+  it('should contain transaction module', (done) => {
+    expect(Payments.getModule('transaction')).to.be.instanceof(Object);
+    done();
   });
-  it('should NOT connect to the braintree API', () => {
-    expect(Payments.connect()).to.throw;
+  // it('should contain plan module', (done) => {
+  //   expect(Payments.getModule('plan')).to.be.instanceof(Object);
+  //   done();
+  // });
+  it('should return undefined', (done) => {
+    expect(Payments.getModule('SomeModule')).to.be.undefined;
+    done();
   });
 });
 
 describe('Payments Config', () => {
   it('should contain merchantId property', () => {
-    expect(paymentsConfig).to.have.ownProperty('merchantId');
+    expect(Payments.getConfig('merchantId')).to.be.equal(braintreeConfig.merchantId);
   });
   it('should contain publicKey property', () => {
-    expect(paymentsConfig).to.have.ownProperty('publicKey');
+    expect(Payments.getConfig('publicKey')).to.be.equal(braintreeConfig.publicKey);
   });
   it('should contain privateKey property', () => {
-    expect(paymentsConfig).to.have.ownProperty('privateKey');
+    expect(Payments.getConfig('privateKey')).to.be.equal(braintreeConfig.privateKey);
   });
   it('should contain environment property', () => {
-    expect(paymentsConfig).to.have.ownProperty('environment');
+    expect(Payments.getConfig('environment')).to.be.equal(braintreeConfig.environment);
   });
-});
-
-describe('Payments Gateway', () => {
-  it('should be an gateway object', () => {
-    expect(Payments.getGateway()).to.be.instanceOf(Object);
+  it('should get all of the keys', () => {
+    expect(Payments.getConfig('*')).to.be.equal(braintreeConfig);
   });
 });

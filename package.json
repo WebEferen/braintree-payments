@@ -15,9 +15,6 @@
     "test-coverage": "./node_modules/.bin/nyc --reporter=html --reporter=text npm run test-build || exit 0",
     "clear": "rm -r dist"
   },
-  "nyc": {
-
-  },
   "engines": {
     "node": "8.9.4"
   },
@@ -32,6 +29,7 @@
   },
   "homepage": "https://gitlab.com/WebEferen/braintree-payments#README",
   "dependencies": {
+    "await-to-js": "^2.0.1",
     "braintree": "^2.12.0",
     "lodash": "^4.17.10"
   },

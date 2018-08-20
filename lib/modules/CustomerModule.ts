@@ -1,3 +1,4 @@
+import to from 'await-to-js';
 import ICustomer from '../interfaces/ICustomer';
 import CustomerValidator from '../validators/CustomerValidator';
 
@@ -14,12 +15,12 @@ export default class CustomerModule {
    * @param {ICustomer} customer Customer object
    */
   public async create(newCustomer: ICustomer) {
+    let err;
+    let customer;
     const validator = new CustomerValidator(newCustomer);
     if (validator.verify()) {
-      try {
-        const customer = await this.customer.create(newCustomer);
-        return customer as ICustomer;
-      } catch (error) { return {success: false}; }
+      [err, customer] = await to(this.customer.create(newCustomer));
+      return customer as ICustomer;
     }
     return {success: false};
   }
@@ -32,7 +33,7 @@ export default class CustomerModule {
     try {
       const customer = await this.customer.find(customerId);
       return {customer: customer as ICustomer, success: true};
-    } catch (error) { return {success: false}; }
+    } catch (e) { return {success: false, error: e}; }
   }
 
   /**
@@ -44,7 +45,7 @@ export default class CustomerModule {
     try {
       const customer = await this.customer.update(customerId, updatedCustomer);
       return {customer: customer as ICustomer, success: true};
-    } catch (error) { return {success: false}; }
+    } catch (e) { return {success: false, error: e}; }
   }
 
   /**
@@ -55,6 +56,6 @@ export default class CustomerModule {
     try {
       await this.customer.delete(customerId);
       return {success: true};
-    } catch (error) { return {success: false}; }
+    } catch (e) { return {success: false, error: e}; }
   }
 }
