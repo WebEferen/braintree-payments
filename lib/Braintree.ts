@@ -33,7 +33,10 @@ export default class Braintree {
   }
 
   public connect() {
+    if (!this.config) { return false; }
     this.gateway = braintree.connect(this.config);
+    if (!this.gateway) { return false; }
+    return true;
   }
 
   public getGateway() {
