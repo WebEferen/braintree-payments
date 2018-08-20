@@ -18,7 +18,7 @@ export default class Braintree {
   }
 
   public getConfig(key: string | null = null) {
-    switch (key) {
+    switch ((key) ? key : null) {
         case 'environment':
             return this.config.environment;
         case 'merchantId':
