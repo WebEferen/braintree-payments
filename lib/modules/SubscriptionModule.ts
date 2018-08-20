@@ -1,4 +1,4 @@
-export class Subscription {
+export default class SubscriptionModule {
 
   private braintree: any;
 

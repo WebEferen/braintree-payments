@@ -1,4 +1,4 @@
-export class Plan {
+export default class PlanModule {
 
   private braintree: any;
 
