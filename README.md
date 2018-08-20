@@ -1,3 +1,7 @@
-# braintree-payments
+# Braintree Payments Module
 
-Braintree payments interface.
+[![pipeline status](https://gitlab.com/WebEferen/braintree-payments/badges/master/pipeline.svg)](https://gitlab.com/WebEferen/braintree-payments/commits/master)
+
+## Getting started
+
+> Braintree payments interface.
