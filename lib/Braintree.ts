@@ -1,20 +1,24 @@
 import * as braintree from 'braintree';
 
-import IConfig from './interfaces/IConfig';
-
 import { Customer } from './modules/Customer';
 import { Plan } from './modules/Plan';
 import { Subscription } from './modules/Subscription';
 import { Transaction } from './modules/Transaction';
+
+import IConfig from './interfaces/IConfig';
 
 export default class Braintree {
 
   private config: IConfig;
   private gateway: any;
 
+  /**
+   * Braintree Module constructor
+   * @param config Config for the braintree
+   */
   constructor(config: IConfig) {
-      this.config = config;
-      return this;
+    this.config = config;
+    return this;
   }
 
   public getConfig(key: string | null = null) {
@@ -47,13 +51,13 @@ export default class Braintree {
       moduleName = moduleName.toLowerCase();
       switch (moduleName) {
         case 'customer':
-            return new Customer(this.gateway);
+            return new Customer(this.getGateway().customer);
         case 'subscription':
-            return new Subscription(this.gateway);
+            return new Subscription(this.getGateway().subscription);
         case 'plan':
-            return new Plan(this.gateway);
+            return new Plan(this.getGateway().plan);
         case 'transaction':
-            return new Transaction(this.gateway);
+            return new Transaction(this.getGateway().transaction);
         default:
             throw new Error('There is no module with that name!');
       }
