@@ -1,13 +1,13 @@
-export default class ClientTokenModule {
+import Module from '../helpers/Module';
 
-  private clientToken: any;
+export default class ClientTokenModule extends Module {
 
   /**
    * Constructor
-   * @param {object} clientToken Braintree clientToken instance
+   * @param {object} instance Braintree clientToken instance
    */
-  constructor(clientToken: any) {
-    this.clientToken = clientToken;
+  constructor(instance: any) {
+    super(instance);
   }
 
   /**
@@ -15,7 +15,7 @@ export default class ClientTokenModule {
    * @param customerId Customer unique id
    */
   public async generate(customerId: string) {
-    const token = await this.clientToken.generate({customerId: customerId as string});
+    const token = await super.getInstance().generate({customerId: customerId as string});
     return {success: true, token: token.clientToken};
   }
 

@@ -1,19 +1,19 @@
 import {to} from 'await-to-js';
+import Module from '../helpers/Module';
 import ISubscription from '../interfaces/ISubscription';
 import SubscriptionValidator from '../validators/SubscriptionValidator';
 
-export default class SubscriptionModule {
+export default class SubscriptionModule extends Module {
 
-  private subscrpition: any;
   private error: any;
   private result: any;
 
   /**
    * Constructor
-   * @param {object} subscrpition Braintree subscription instance
+   * @param {object} instance Braintree subscription instance
    */
-  constructor(subscription: any) {
-    this.subscrpition = subscription;
+  constructor(instance: any) {
+    super(instance);
   }
 
   /**
@@ -23,7 +23,7 @@ export default class SubscriptionModule {
   public async create(newSubscription: ISubscription) {
     const validator = new SubscriptionValidator(newSubscription);
     if (validator.verify()) {
-      [this.error, this.result] = await to(this.subscrpition.create(newSubscription));
+      [this.error, this.result] = await to(super.getInstance().create(newSubscription));
       if (this.error) { return {success: false, error: this.error.type}; }
       return this.result as ISubscription;
     }
