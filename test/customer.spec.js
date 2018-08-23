@@ -43,9 +43,11 @@ describe('Customer', () => {
   before((done) => {
     Customer.find(validTestCustomerId).then(result => {
       if (result.success) {
-        Customer.delete(validTestCustomerId).then(result => {
+        Customer.delete(validTestCustomerId).then(() => {
           done();
-        })
+        });
+      } else {
+        done();
       }
     });
   });

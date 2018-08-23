@@ -5,7 +5,13 @@ import CustomerValidator from '../validators/CustomerValidator';
 export default class CustomerModule {
 
   private customer: any;
+  private error: any;
+  private result: any;
 
+  /**
+   * Constructor
+   * @param {object} customer Braintree customer instance
+   */
   constructor(customer: any) {
     this.customer = customer;
   }
@@ -15,25 +21,22 @@ export default class CustomerModule {
    * @param {ICustomer} customer Customer object
    */
   public async create(newCustomer: ICustomer) {
-    let err;
-    let customer;
     const validator = new CustomerValidator(newCustomer);
     if (validator.verify()) {
-      [err, customer] = await to(this.customer.create(newCustomer));
-      return customer as ICustomer;
+      [this.error, this.result] = await to(this.customer.create(newCustomer));
+      return this.result as ICustomer;
     }
-    return {success: false};
+    return {success: false, error: 'ValidationError'};
   }
 
   /**
    * Finds specific customer inside braintree database
-   * @param {ICustomer} customerId Customer unique index
+   * @param {String} customerId Customer unique index
    */
   public async find(customerId: string) {
-    try {
-      const customer = await this.customer.find(customerId);
-      return {customer: customer as ICustomer, success: true};
-    } catch (e) { return {success: false, error: e}; }
+    [this.error, this.result] = await to(this.customer.find(customerId));
+    if (!this.error) { return {success: true, customer: this.result as ICustomer}; }
+    return {success: false, error: this.error.type};
   }
 
   /**
@@ -42,10 +45,9 @@ export default class CustomerModule {
    * @param {ICustomer} updatedCustomer Customer object
    */
   public async update(customerId: string, updatedCustomer: ICustomer) {
-    try {
-      const customer = await this.customer.update(customerId, updatedCustomer);
-      return {customer: customer as ICustomer, success: true};
-    } catch (e) { return {success: false, error: e}; }
+    [this.error, this.result] = await to(this.customer.update(customerId, updatedCustomer));
+    if (!this.error) { return {success: true, customer: this.result as ICustomer}; }
+    return {success: false, error: this.error.type};
   }
 
   /**
@@ -53,9 +55,8 @@ export default class CustomerModule {
    * @param {String} customerId Customer unique index
    */
   public async delete(customerId: string) {
-    try {
-      await this.customer.delete(customerId);
-      return {success: true};
-    } catch (e) { return {success: false, error: e}; }
+    [this.error, this.result] = await to(this.customer.delete(customerId));
+    if (!this.error) { return {success: true}; }
+    return {success: false, error: this.error.type};
   }
 }

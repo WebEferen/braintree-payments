@@ -28,8 +28,8 @@ describe('Transaction', () => {
   });
 
   // Invalid
-  it('should NOT create braintree transaction', () => {
-    Transaction.create({}).then(result => {
+  it('should NOT sale braintree transaction', () => {
+    Transaction.sale({}).then(result => {
       expect(result.success).to.be.false;
     });
   });
@@ -50,9 +50,8 @@ describe('Transaction', () => {
   });
 
   // Valid
-  it('should create braintree transaction', (done) => { 
-    Transaction.create(validTransactionObject).then(result => {
-      if(result.error) { done(result.error); }
+  it('should sale braintree transaction', (done) => { 
+    Transaction.sale(validTransactionObject).then(result => {
       validTransactionId = result.transaction.id;
       expect(result.success).to.be.true;
       done();
@@ -60,21 +59,18 @@ describe('Transaction', () => {
   });
   it('should get braintree transaction', (done) => { 
     Transaction.find(validTransactionId).then(result => {
-      if(result.error) { done(result.error); }
       expect(result.success).to.be.true;
       done();
     }).catch(e => { done(e); });
   });
   it('should refund braintree transaction', (done) => {
     Transaction.refund(validTransactionId, validTransactionUpdate).then(result => {
-      if(result.error) { done(result.error); }
       expect(result.success).to.be.true;
       done();
     }).catch(e => { done(e); });
   });
   it('should cancel-release braintree transaction', (done) => {
     Transaction.cancelRelease(validTransactionId).then(result => {
-      if(result.error) { done(result.error); }
       expect(result.success).to.be.true;
       done();
     }).catch(e => { done(e); });
