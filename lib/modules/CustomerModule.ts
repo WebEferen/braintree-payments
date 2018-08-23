@@ -24,6 +24,7 @@ export default class CustomerModule {
     const validator = new CustomerValidator(newCustomer);
     if (validator.verify()) {
       [this.error, this.result] = await to(this.customer.create(newCustomer));
+      if (this.error) { return {success: false, error: this.error.type}; }
       return this.result as ICustomer;
     }
     return {success: false, error: 'ValidationError'};
