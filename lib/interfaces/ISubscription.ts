@@ -26,6 +26,7 @@ export default interface ISubscription {
   numberOfBillingCycles: number;
   currentBillingCycle: number;
   paymentMethodToken: string;
+  paymentMethodNonce: string;
   trialDurationUnit: string;
   merchantAccountId: string;
   nextBillAmount: string;

@@ -11,11 +11,19 @@ export default class ClientTokenModule extends Module {
   }
 
   /**
-   * Generates payment token
+   * Generates payment token for the given customer
    * @param customerId Customer unique id
    */
-  public async generate(customerId: string) {
+  public async generateByCustomerId(customerId: string) {
     const token = await super.getInstance().generate({customerId: customerId as string});
+    return {success: true, token: token.clientToken};
+  }
+
+  /**
+   * Generates payment token
+   */
+  public async generate() {
+    const token = await super.getInstance().generate();
     return {success: true, token: token.clientToken};
   }
 
