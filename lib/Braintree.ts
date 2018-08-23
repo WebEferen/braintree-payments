@@ -1,7 +1,7 @@
 import * as braintree from 'braintree';
 
 import CustomerModule from './modules/CustomerModule';
-// import PlanModule from './modules/PlanModule';
+import PlanModule from './modules/PlanModule';
 // import SubscriptionModule from './modules/SubscriptionModule';
 import TransactionModule from './modules/TransactionModule';
 
@@ -62,8 +62,8 @@ export default class Braintree {
                     return new CustomerModule(gateway);
                 // case 'subscription':
                 //     return new SubscriptionModule(gateway);
-                // case 'plan':
-                //     return new PlanModule(gateway);
+                case 'plan':
+                    return new PlanModule(gateway);
                 case 'transaction':
                     return new TransactionModule(gateway);
             }
