@@ -5,9 +5,6 @@ import TransactionValidator from '../validators/TransactionValidator';
 
 export default class TransactionModule extends Module {
 
-  private error: any;
-  private result: any;
-
   /**
    * Constructor
    * @param {object} instance Braintree transaction instance

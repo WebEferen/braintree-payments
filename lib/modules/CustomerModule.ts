@@ -5,9 +5,6 @@ import CustomerValidator from '../validators/CustomerValidator';
 
 export default class CustomerModule extends Module {
 
-  private error: any;
-  private result: any;
-
   /**
    * Constructor
    * @param {object} instance Braintree customer instance

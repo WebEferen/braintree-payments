@@ -5,9 +5,6 @@ import SubscriptionValidator from '../validators/SubscriptionValidator';
 
 export default class SubscriptionModule extends Module {
 
-  private error: any;
-  private result: any;
-
   /**
    * Constructor
    * @param {object} instance Braintree subscription instance

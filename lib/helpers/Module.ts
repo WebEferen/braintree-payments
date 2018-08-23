@@ -1,5 +1,7 @@
 export default abstract class Module {
 
+  public error: any;
+  public result: any;
   private instance: any;
 
   constructor(instance: any) {
