@@ -30,6 +30,16 @@ export default class Simplifier {
   }
 
   /**
+   * Generates client token with the customer unique index inside
+   * @param customerId Customer unique index
+   */
+  public async generateClientTokenById(customerId: string) {
+    const clientTokenModule = this.braintree.getModule('clientToken');
+    const token = await clientTokenModule.generate({customerId});
+    return token;
+  }
+
+  /**
    * Subscribes specific user to the specific plan with addons
    * @param paymentMethodNonce Nonce from the drop-in UI
    * @param planId Specific unique plan index
