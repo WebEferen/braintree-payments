@@ -7,7 +7,7 @@ import IPaymentMethod from '../interfaces/IPaymentMethod';
 import ISubscription from '../interfaces/ISubscription';
 import ITransaction from '../interfaces/ITransaction';
 
-export default class Checkout {
+export default class Simplifier {
 
   private braintree: any;
 
@@ -17,6 +17,7 @@ export default class Checkout {
    */
   constructor(config: IConfig) {
     this.braintree = new Braintree(config);
+    this.braintree.connect();
   }
 
   /**
