@@ -3,6 +3,9 @@ import Braintree from '../Braintree';
 import IAddOn from '../interfaces/IAddOn';
 import IConfig from '../interfaces/IConfig';
 import ICustomer from '../interfaces/ICustomer';
+import IPaymentMethod from '../interfaces/IPaymentMethod';
+import ISubscription from '../interfaces/ISubscription';
+import ITransaction from '../interfaces/ITransaction';
 
 export default class Checkout {
 
@@ -34,7 +37,7 @@ export default class Checkout {
   public async subscribe(paymentMethodNonce: string, planId: string, addOns: IAddOn[]) {
     const subscriptionModule = this.braintree.getModule('subscription');
     const subscribe = await subscriptionModule.create({paymentMethodNonce, planId, addOns});
-    return subscribe;
+    return subscribe as ISubscription;
   }
 
   /**
@@ -46,7 +49,17 @@ export default class Checkout {
   public async sale(paymentMethodNonce: string, amount: number, customer: ICustomer) {
     const transactionModule = this.braintree.getModule('transaction');
     const transaction = await transactionModule.sale({paymentMethodNonce, amount, customer});
-    return transaction;
+    return transaction as ITransaction;
   }
 
+  /**
+   * Create payment method based on the customer index provided
+   * @param paymentMethodNonce Nonce from the drop-in UI
+   * @param customerId Customer unique index
+   */
+  public async createPaymentMethod(paymentMethodNonce: string, customerId: string) {
+    const paymentMethodModule = this.braintree.getModule('paymentMethod');
+    const paymentMethod = await paymentMethodModule.create({paymentMethodNonce, customerId});
+    return paymentMethod as IPaymentMethod;
+  }
 }

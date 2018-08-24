@@ -2,6 +2,7 @@ import * as braintree from 'braintree';
 
 import ClientTokenModule from './modules/ClientTokenModule';
 import CustomerModule from './modules/CustomerModule';
+import PaymentMethodModule from './modules/PaymentMethodModule';
 import PlanModule from './modules/PlanModule';
 import SubscriptionModule from './modules/SubscriptionModule';
 import TransactionModule from './modules/TransactionModule';
@@ -67,6 +68,8 @@ export default class Braintree {
                     return new TransactionModule(gateway);
                 case 'clientToken':
                     return new ClientTokenModule(gateway);
+                case 'paymentMethod':
+                    return new PaymentMethodModule(gateway);
             }
         }
         return undefined;
