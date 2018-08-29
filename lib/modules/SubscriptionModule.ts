@@ -51,7 +51,7 @@ export default class SubscriptionModule extends Module {
 
   /**
    * Cancels specific subscription
-   * @param subscriptionId Subscription unique index
+   * @param {string} subscriptionId Subscription unique index
    */
   public async cancel(subscriptionId: string) {
     [this.error, this.result] = await to(super.getInstance().cancel(subscriptionId));
