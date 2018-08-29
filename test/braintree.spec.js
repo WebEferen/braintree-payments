@@ -1,8 +1,9 @@
 'use strict';
+
+const config = require('./config.js');
 const expect = require('chai').expect;
 const Braintree = require('../dist/index.js');
-const braintreeConfig = require('./braintree.config.js');
-const Payments = Braintree.Payments(braintreeConfig);
+const Payments = Braintree.Payments(config.payments);
 
 describe('Modules', () => {
   it('should contain customer module', (done) => {
@@ -41,18 +42,18 @@ describe('Gateway', () => {
 
 describe('Payments Config', () => {
   it('should contain merchantId property', () => {
-    expect(Payments.getConfig('merchantId')).to.be.equal(braintreeConfig.merchantId);
+    expect(Payments.getConfig('merchantId')).to.be.equal(config.payments.merchantId);
   });
   it('should contain publicKey property', () => {
-    expect(Payments.getConfig('publicKey')).to.be.equal(braintreeConfig.publicKey);
+    expect(Payments.getConfig('publicKey')).to.be.equal(config.payments.publicKey);
   });
   it('should contain privateKey property', () => {
-    expect(Payments.getConfig('privateKey')).to.be.equal(braintreeConfig.privateKey);
+    expect(Payments.getConfig('privateKey')).to.be.equal(config.payments.privateKey);
   });
   it('should contain environment property', () => {
-    expect(Payments.getConfig('environment')).to.be.equal(braintreeConfig.environment);
+    expect(Payments.getConfig('environment')).to.be.equal(config.payments.environment);
   });
   it('should get all of the keys', () => {
-    expect(Payments.getConfig('*')).to.be.equal(braintreeConfig);
+    expect(Payments.getConfig('*')).to.be.equal(config.payments);
   });
 });

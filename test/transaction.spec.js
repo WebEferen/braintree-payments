@@ -1,25 +1,14 @@
 'use strict';
 const chai = require('chai');
+const config = require('./config');
+const mockups = config.mockups;
 const expect = chai.expect;
 
 const Braintree = require('../dist/index.js');
-const braintreeConfig = require('./braintree.config');
-
-const Payments = Braintree.Payments(braintreeConfig);
+const Payments = Braintree.Payments(config.payments);
 const Transaction = Payments.getModule('transaction');
 
-// Mockups
 let validTransactionId;
-const validTestCustomerId = 'testCustomerId';
-const validTransactionObject = {
-  customerId: validTestCustomerId,
-  amount: 99.00,
-  paymentMethodNonce: 'fake-valid-nonce'
-};
-const validTransactionUpdate = {
-  amount: 100.00
-};
-
 
 describe('Transaction', () => {
 
@@ -51,7 +40,7 @@ describe('Transaction', () => {
 
   // Valid
   it('should sale braintree transaction', (done) => { 
-    Transaction.sale(validTransactionObject).then(result => {
+    Transaction.sale(mockups.validTransaction).then(result => {
       validTransactionId = result.transaction.id;
       expect(result.success).to.be.true;
       done();
@@ -64,7 +53,7 @@ describe('Transaction', () => {
     }).catch(e => { done(e); });
   });
   it('should refund braintree transaction', (done) => {
-    Transaction.refund(validTransactionId, validTransactionUpdate).then(result => {
+    Transaction.refund(validTransactionId, mockups.validTransactionUpdate).then(result => {
       expect(result.success).to.be.true;
       done();
     }).catch(e => { done(e); });
