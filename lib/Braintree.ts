@@ -1,8 +1,10 @@
 import * as braintree from 'braintree';
 
+import ClientTokenModule from './modules/ClientTokenModule';
 import CustomerModule from './modules/CustomerModule';
+import PaymentMethodModule from './modules/PaymentMethodModule';
 import PlanModule from './modules/PlanModule';
-// import SubscriptionModule from './modules/SubscriptionModule';
+import SubscriptionModule from './modules/SubscriptionModule';
 import TransactionModule from './modules/TransactionModule';
 
 import IConfig from './interfaces/IConfig';
@@ -52,20 +54,22 @@ export default class Braintree {
      * @param moduleName Name of the module
      */
     public getModule(moduleName: string) {
-        moduleName = moduleName.toLowerCase();
-
         if (this.getGateway().hasOwnProperty(moduleName)) {
             const gateway = this.getGateway()[moduleName];
 
             switch (moduleName) {
                 case 'customer':
                     return new CustomerModule(gateway);
-                // case 'subscription':
-                //     return new SubscriptionModule(gateway);
+                case 'subscription':
+                    return new SubscriptionModule(gateway);
                 case 'plan':
                     return new PlanModule(gateway);
                 case 'transaction':
                     return new TransactionModule(gateway);
+                case 'clientToken':
+                    return new ClientTokenModule(gateway);
+                case 'paymentMethod':
+                    return new PaymentMethodModule(gateway);
             }
         }
         return undefined;
@@ -73,8 +77,10 @@ export default class Braintree {
 
     /**
      * Gets into gateway
+     * @param {String | null} gateway Specify gateway or gets all
      */
-    private getGateway() {
+    public getGateway(gateway: string | null = null) {
+        if (gateway) { return this.gateway[gateway]; }
         return this.gateway;
     }
 }

@@ -7,6 +7,7 @@ const braintreeConfig = require('./braintree.config');
 
 const Payments = Braintree.Payments(braintreeConfig);
 const Customer = Payments.getModule('customer');
+const ClientToken = Payments.getModule('clientToken');
 
 // Some mockups
 const invalidCustomerObject = {
@@ -40,12 +41,12 @@ const validTestCustomer = {
 };
 
 describe('Customer', () => {
-  before((done) => {
-    Customer.find(validTestCustomerId).then(result => {
-      if (result.success) { 
-        Customer.delete(validTestCustomerId).then(() => { done(); });
-      } else { done(); }
-    });
+  before(async () => {
+    const customer = await Customer.find(validTestCustomerId);
+    if (customer.success) { 
+      const deleted = Customer.delete(validTestCustomerId);
+      if (deleted.success) { return; }
+    } else return;
   });
 
   it('should be a module', () => {
@@ -53,78 +54,80 @@ describe('Customer', () => {
   });
 
   // Incorrect tests [negation tests]
-  it('should NOT create braintree customer (empty)', (done) => {
-    Customer.create({}).then((result) => {
-      expect(result.success).to.be.false;
-      done();
-    }).catch(e => { done(e); });
+  it('should NOT create braintree customer (empty)', async () => {
+    const customer = await Customer.create({});
+    expect(customer.success).to.be.false;
   });
-  it('should NOT get braintree customer', (done) => {
-    Customer.find('invalidCustomerId').then(result => {
-      expect(result.success).to.be.false;
-      done();
-    }).catch(e => { done(e); });
+
+  it('should NOT create braintree customer (invalid)', async () => {
+    const customer = await Customer.create(invalidCustomerObject);
+    if (customer.error) { return; }
+    expect(customer.success).to.be.false;
   });
-  it('should NOT update braintree customer', (done) => {
-    Customer.update('invalidCustomerId', {}).then(result => {
-      expect(result.success).to.be.false;
-      done();
-    }).catch(e => { done(e); });
+
+  it('should NOT get braintree customer', async () => {
+    const customer = await Customer.find('invalid');
+    expect(customer.success).to.be.false;
   });
-  it('should NOT remove braintree customer', (done) => {
-    Customer.delete('invalidCustomerId').then(result => {
-      expect(result.success).to.be.false;
-      done();
-    }).catch(e => { done(e); });
+
+  it('should NOT update braintree customer', async () => {
+    const customer = await Customer.update('invalid', {});
+    expect(customer.success).to.be.false;
+  });
+
+  it('should NOT remove braintree customer', async () => {
+    const customer = await Customer.delete('invalid');
+    expect(customer.success).to.be.false;
   });
 
   // Valid tests
-  it('should create braintree customer', (done) => {
-    Customer.create(validCustomerObject).then(result => {
-      if(result.error) { done(result.error); }
-      validCustomerId = result.customer.id;
-      expect(result.success).to.be.true;
-      done();
-    }).catch(e => { done(e); });
+  it('should create braintree customer', async () => {
+    const customer = await Customer.create(validCustomerObject);
+    if (customer.error) { return; }
+    validCustomerId = customer.customer.id;
+    expect(customer.success).to.be.true;
   });
 
-  it('should get braintree customer', (done) => {
-    Customer.find(validCustomerId).then(result => {
-      if(result.error) { done(result.error); }
-      expect(result.success).to.be.true;
-      done();
-    }).catch(e => { done(e); });
+  it('should get braintree customer', async () => {
+    const customer = await Customer.find(validCustomerId);
+    if (customer.error) { return; }
+    expect(customer.success).to.be.true;
   });
 
-  it('should update braintree customer', (done) => {
-    Customer.update(validCustomerId, validCustomerUpdateObject).then(result => {
-      if(result.error) { done(result.error); }
-      expect(result.success).to.be.true;
-      done();
-    }).catch(e => { done(e); });
+  it('should update braintree customer', async () => {
+    const customer = await Customer.update(validCustomerId, validCustomerUpdateObject);
+    if (customer.error) { return; }
+    expect(customer.success).to.be.true;
   });
 
-  it('should delete braintree customer', (done) => {
-    Customer.delete(validCustomerId).then(result => {
-      if(result.error) { done(result.error); }
-      expect(result.success).to.be.true;
-      done();
-    }).catch(e => { done(e); });
+  it('should delete braintree customer', async () => {
+    const customer = await Customer.delete(validCustomerId);
+    if (customer.error) { return; }
+    expect(customer.success).to.be.true;
   });
 
-  it('should create braintree TEST customer', (done) => {
-    Customer.create(validTestCustomer).then(result => {
-      if(result.error) { done(result.error); }
-      expect(result.success).to.be.true;
-      done();
-    }).catch(e => { done(e); });
+  it('should create braintree TEST customer', async () => {
+    const customer = await Customer.create(validTestCustomer);
+    if (customer.error) { return; }
+    expect(customer.success).to.be.true;
   });
 
-  it('should get braintree TEST customer', (done) => {
-    Customer.find(validTestCustomerId).then(result => {
-      if(result.error) { done(result.error); }
-      expect(result.success).to.be.true;
-      done();
-    }).catch(e => { done(e); });
+  it('should get braintree TEST customer', async () => {
+    const customer = await Customer.find(validTestCustomerId);
+    if (customer.error) { return; }
+    expect(customer.success).to.be.true;
+  });
+});
+
+describe('ClientToken', () => {
+  it('should be a module', () => {
+    expect(ClientToken).to.be.instanceof(Object);
+  });
+
+  it('should generate customer token', async () => {
+    const token = await ClientToken.generate(validTestCustomerId);
+    if (token.error) { return; }
+    expect(token.success).to.be.true;
+    expect(token.token).to.be.an('string');
   });
 });

@@ -1,19 +1,16 @@
 import to from 'await-to-js';
+import Module from '../helpers/Module';
 import ICustomer from '../interfaces/ICustomer';
 import CustomerValidator from '../validators/CustomerValidator';
 
-export default class CustomerModule {
-
-  private customer: any;
-  private error: any;
-  private result: any;
+export default class CustomerModule extends Module {
 
   /**
    * Constructor
-   * @param {object} customer Braintree customer instance
+   * @param {object} instance Braintree customer instance
    */
-  constructor(customer: any) {
-    this.customer = customer;
+  constructor(instance: any) {
+    super(instance);
   }
 
   /**
@@ -23,7 +20,8 @@ export default class CustomerModule {
   public async create(newCustomer: ICustomer) {
     const validator = new CustomerValidator(newCustomer);
     if (validator.verify()) {
-      [this.error, this.result] = await to(this.customer.create(newCustomer));
+      [this.error, this.result] = await to(super.getInstance().create(newCustomer));
+      if (this.error) { return {success: false, error: this.error.type}; }
       return this.result as ICustomer;
     }
     return {success: false, error: 'ValidationError'};
@@ -34,7 +32,7 @@ export default class CustomerModule {
    * @param {String} customerId Customer unique index
    */
   public async find(customerId: string) {
-    [this.error, this.result] = await to(this.customer.find(customerId));
+    [this.error, this.result] = await to(super.getInstance().find(customerId));
     if (!this.error) { return {success: true, customer: this.result as ICustomer}; }
     return {success: false, error: this.error.type};
   }
@@ -45,7 +43,7 @@ export default class CustomerModule {
    * @param {ICustomer} updatedCustomer Customer object
    */
   public async update(customerId: string, updatedCustomer: ICustomer) {
-    [this.error, this.result] = await to(this.customer.update(customerId, updatedCustomer));
+    [this.error, this.result] = await to(super.getInstance().update(customerId, updatedCustomer));
     if (!this.error) { return {success: true, customer: this.result as ICustomer}; }
     return {success: false, error: this.error.type};
   }
@@ -55,7 +53,7 @@ export default class CustomerModule {
    * @param {String} customerId Customer unique index
    */
   public async delete(customerId: string) {
-    [this.error, this.result] = await to(this.customer.delete(customerId));
+    [this.error, this.result] = await to(super.getInstance().delete(customerId));
     if (!this.error) { return {success: true}; }
     return {success: false, error: this.error.type};
   }
