@@ -1,6 +1,6 @@
 import Braintree from './lib/Braintree';
 import Environment from './lib/helpers/Environment';
-// import Simplifier from './lib/helpers/Simplifier';
+import Simplifier from './lib/helpers/Simplifier';
 
 import IConfig from './lib/interfaces/IConfig';
 
@@ -14,14 +14,14 @@ export function Payments(braintreeConfig: IConfig) {
   return btGateway;
 }
 
-// /**
-//  * Fast checkout helper
-//  * @param braintreeConfig Configuration for the braintree
-//  */
-// export function Checkout(braintreeConfig: IConfig) {
-//   const simplifier = new Simplifier(braintreeConfig);
-//   return simplifier;
-// }
+/**
+ * Fast checkout helper
+ * @param braintreeConfig Configuration for the braintree
+ */
+export function Checkout(braintreeConfig: IConfig) {
+  const simplifier = new Simplifier(braintreeConfig);
+  return simplifier;
+}
 
 /**
  * Gets the enviroment
