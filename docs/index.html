@@ -65,12 +65,31 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h1 id="braintree-payments-module">Braintree Payments Module</h1>
+				<blockquote>
+					<p>Braintree deployment and build status</p>
+				</blockquote>
 				<p><a href="https://gitlab.com/WebEferen/braintree-payments/commits/master"><img src="https://gitlab.com/WebEferen/braintree-payments/badges/master/pipeline.svg" alt="pipeline status"></a>
 				<a href="https://gitlab.com/WebEferen/braintree-payments/commits/master"><img src="https://gitlab.com/WebEferen/braintree-payments/badges/master/coverage.svg" alt="coverage report"></a></p>
 				<h2 id="getting-started">Getting started</h2>
 				<blockquote>
-					<p>Braintree payments interface.</p>
+					<p>Read the documentation under <strong>docs</strong></p>
 				</blockquote>
+				<p>To get that on the master server just type:</p>
+				<pre><code class="language-javascript">npm install braintree-payments</code></pre>
+				<p>To check current status take a look on the tests:</p>
+				<pre><code class="language-javascript">npm test</code></pre>
+				<h2 id="working-with-the-bridge">Working with the bridge</h2>
+				<p>First of all we have to specify the braintree module instance and paste the configuration inside <strong>Payments</strong> constructor.</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> Payments = Braintree.Payments(configuration);</code></pre>
+				<blockquote>
+					<p>Inside configuration we will have to specify some params</p>
+				</blockquote>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> configuration = {
+  <span class="hljs-attr">environment</span>: <span class="hljs-string">'Sandbox | Qa | Development | Production'</span>,
+  <span class="hljs-attr">merchantId</span>: <span class="hljs-string">'MerchantID'</span>,
+  <span class="hljs-attr">publicKey</span>: <span class="hljs-string">'PublicKey'</span>,
+  <span class="hljs-attr">privateKey</span>: <span class="hljs-string">'PrivateKey'</span>
+};</code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
