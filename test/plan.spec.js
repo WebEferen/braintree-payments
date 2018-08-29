@@ -1,14 +1,12 @@
 'use strict';
 const chai = require('chai');
+const config = require('./config');
+const mockups = config.mockups;
 const expect = chai.expect;
 
 const Braintree = require('../dist/index.js');
-const braintreeConfig = require('./braintree.config');
-
-const Payments = Braintree.Payments(braintreeConfig);
+const Payments = Braintree.Payments(config.payments);
 const Plan = Payments.getModule('plan');
-
-const planId = 'bronzePlan';
 
 describe('Plan', () => {
 
@@ -24,14 +22,14 @@ describe('Plan', () => {
   });
 
   it('should NOT get specific plan', (done) => {
-    Plan.find('someInvalidId').then(result => {
+    Plan.find(mockups.invalidPlanId).then(result => {
       expect(result.success).to.be.false;
       done();
     }).catch(e => { done(e); });
   });
 
   it('should get specific plan', (done) => {
-    Plan.find(planId).then(result => {
+    Plan.find(mockups.planId).then(result => {
       expect(result.success).to.be.true;
       done();
     }).catch(e => { done(e); });

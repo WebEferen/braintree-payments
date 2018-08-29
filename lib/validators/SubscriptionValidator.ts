@@ -2,7 +2,7 @@ import Validator from '../helpers/Validator';
 
 export default class SubscriptionValidator extends Validator {
 
-  public verifyPattern = ['paymentMethodNonce', 'planId'];
+  public verifyPattern = ['paymentMethodToken', 'planId', 'addOns'];
 
   constructor(modelToVerify: object) {
     super(modelToVerify);

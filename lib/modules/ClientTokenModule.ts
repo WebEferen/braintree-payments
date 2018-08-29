@@ -15,6 +15,7 @@ export default class ClientTokenModule extends Module {
    * @param customerId Customer unique id
    */
   public async generateByCustomerId(customerId: string) {
+    if (!customerId) { return {success: false, error: 'ValidationError'}; }
     const token = await super.getInstance().generate({customerId: customerId as string});
     return {success: true, token: token.clientToken};
   }

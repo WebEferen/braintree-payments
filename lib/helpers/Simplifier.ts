@@ -39,38 +39,38 @@ export default class Simplifier {
     return token;
   }
 
-  /**
-   * Subscribes specific user to the specific plan with addons
-   * @param paymentMethodNonce Nonce from the drop-in UI
-   * @param planId Specific unique plan index
-   * @param addOns Addons array
-   */
-  public async subscribe(paymentMethodNonce: string, planId: string, addOns: IAddOn[]) {
-    const subscriptionModule = this.braintree.getModule('subscription');
-    const subscribe = await subscriptionModule.create({paymentMethodNonce, planId, addOns});
-    return subscribe as ISubscription;
-  }
+  // /**
+  //  * Subscribes specific user to the specific plan with addons
+  //  * @param paymentMethodNonce Nonce from the drop-in UI
+  //  * @param planId Specific unique plan index
+  //  * @param addOns Addons array
+  //  */
+  // public async subscribe(paymentMethodNonce: string, planId: string, addOns: IAddOn[]) {
+  //   const subscriptionModule = this.braintree.getModule('subscription');
+  //   const subscribe = await subscriptionModule.create({paymentMethodNonce, planId, addOns});
+  //   return subscribe as ISubscription;
+  // }
 
-  /**
-   * Creates specific transaction base on the nonce provided
-   * @param paymentMethodNonce Nonce from the drop-in UI
-   * @param amount Specific amount
-   * @param customer Customer to create
-   */
-  public async sale(paymentMethodNonce: string, amount: number, customer: ICustomer) {
-    const transactionModule = this.braintree.getModule('transaction');
-    const transaction = await transactionModule.sale({paymentMethodNonce, amount, customer});
-    return transaction as ITransaction;
-  }
+  // /**
+  //  * Creates specific transaction base on the nonce provided
+  //  * @param paymentMethodNonce Nonce from the drop-in UI
+  //  * @param amount Specific amount
+  //  * @param customer Customer to create
+  //  */
+  // public async sale(paymentMethodNonce: string, amount: number, customer: ICustomer) {
+  //   const transactionModule = this.braintree.getModule('transaction');
+  //   const transaction = await transactionModule.sale({paymentMethodNonce, amount, customer});
+  //   return transaction as ITransaction;
+  // }
 
-  /**
-   * Create payment method based on the customer index provided
-   * @param paymentMethodNonce Nonce from the drop-in UI
-   * @param customerId Customer unique index
-   */
-  public async createPaymentMethod(paymentMethodNonce: string, customerId: string) {
-    const paymentMethodModule = this.braintree.getModule('paymentMethod');
-    const paymentMethod = await paymentMethodModule.create({paymentMethodNonce, customerId});
-    return paymentMethod as IPaymentMethod;
-  }
+  // /**
+  //  * Create payment method based on the customer index provided
+  //  * @param paymentMethodNonce Nonce from the drop-in UI
+  //  * @param customerId Customer unique index
+  //  */
+  // public async createPaymentMethod(paymentMethodNonce: string, customerId: string) {
+  //   const paymentMethodModule = this.braintree.getModule('paymentMethod');
+  //   const paymentMethod = await paymentMethodModule.create({paymentMethodNonce, customerId});
+  //   return paymentMethod as IPaymentMethod;
+  // }
 }
