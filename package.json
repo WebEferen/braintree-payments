@@ -1,6 +1,6 @@
 {
   "name": "braintree-payments",
-  "version": "2.1.0",
+  "version": "2.2.1",
   "description": "Typescript Braintree Payments",
   "main": "dist/index",
   "types": "dist/index",
@@ -9,7 +9,7 @@
     "tslint-fix": "./node_modules/.bin/tslint -p tsconfig.json --fix || exit 0",
     "mocha": "./node_modules/.bin/mocha --timeout 5000 --reporter spec || exit 0",
     "build": "./node_modules/.bin/tsc",
-    "test": "npm run clear && npm run test-build",
+    "test": "npm run test-build",
     "test-build": "npm run clear && npm run build && npm run mocha",
     "test-production": "npm run tslint && npm test",
     "test-coverage": "./node_modules/.bin/nyc --reporter=html --reporter=text npm run test-build || exit 0",

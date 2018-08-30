@@ -4,6 +4,7 @@ import AddOnModule from './modules/AddOnModule';
 import ClientTokenModule from './modules/ClientTokenModule';
 import CustomerModule from './modules/CustomerModule';
 import PaymentMethodModule from './modules/PaymentMethodModule';
+import PaymentMethodNonceModule from './modules/PaymentMethodNonceModule';
 import PlanModule from './modules/PlanModule';
 import SubscriptionModule from './modules/SubscriptionModule';
 import TransactionModule from './modules/TransactionModule';
@@ -71,6 +72,8 @@ export default class Braintree {
                     return new ClientTokenModule(gateway);
                 case 'paymentMethod':
                     return new PaymentMethodModule(gateway);
+                case 'paymentMethodNonce':
+                    return new PaymentMethodNonceModule(gateway);
                 case 'addOn':
                     return new AddOnModule(gateway);
             }
