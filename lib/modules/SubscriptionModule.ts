@@ -18,6 +18,10 @@ export default class SubscriptionModule extends Module {
    * @param {ISubscription} newSubscription Subscription object
    */
   public async create(newSubscription: ISubscription) {
+    if (!newSubscription.merchantAccountId) {
+      newSubscription.merchantAccountId = super.getDefaultCurrency().account;
+    }
+
     const validator = new SubscriptionValidator(newSubscription);
     if (validator.verify()) {
       [this.error, this.result] = await to(super.getInstance().create(newSubscription));

@@ -18,6 +18,10 @@ export default class TransactionModule extends Module {
    * @param {ITransaction} newTransaction Transaction object
    */
   public async sale(newTransaction: ITransaction) {
+    if (!newTransaction.merchantAccountId) {
+      newTransaction.merchantAccountId = super.getDefaultCurrency().account;
+    }
+
     const validator = new TransactionValidator(newTransaction);
     if (validator.verify()) {
       [this.error, this.result] = await to(super.getInstance().sale(newTransaction));

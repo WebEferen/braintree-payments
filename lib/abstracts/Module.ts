@@ -36,9 +36,9 @@ export default abstract class Module {
     const currency = this.instance.defaultCurrency;
     const foundedCurrency = this.getCurrency(currency);
     if (foundedCurrency) {
-      return foundedCurrency;
+      return foundedCurrency as ICurrency;
     }
-    return this.getCurrencies()[0];
+    return this.getCurrencies()[0] as ICurrency;
   }
 
   /**
