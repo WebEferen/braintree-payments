@@ -7,7 +7,7 @@ import IPaymentMethod from '../interfaces/IPaymentMethod';
 import ISubscription from '../interfaces/ISubscription';
 import ITransaction from '../interfaces/ITransaction';
 
-export default class Simplifier {
+export default class CheckoutHelper {
 
   private braintree: any;
 

@@ -10,6 +10,7 @@ import SubscriptionModule from './modules/SubscriptionModule';
 import TransactionModule from './modules/TransactionModule';
 
 import IConfig from './interfaces/IConfig';
+import ICurrency from './interfaces/ICurrency';
 
 export default class Braintree {
 
@@ -88,5 +89,13 @@ export default class Braintree {
     public getGateway(gateway: string | null = null) {
         if (gateway) { return this.gateway[gateway]; }
         return this.gateway;
+    }
+
+    /**
+     * Sets currency accounts
+     * @param {ICurrency[]} currencies Currencies object
+     */
+    public setCurrencies(currencies: ICurrency[]) {
+        this.gateway.currencies = currencies;
     }
 }

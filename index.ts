@@ -1,16 +1,19 @@
 import Braintree from './lib/Braintree';
-import Environment from './lib/helpers/Environment';
-import Simplifier from './lib/helpers/Simplifier';
+
+import CheckoutHelper from './lib/helpers/CheckoutHelper';
+import EnvironmentHelper from './lib/helpers/EnvironmentHelper';
 
 import IConfig from './lib/interfaces/IConfig';
+import ICurrency from './lib/interfaces/ICurrency';
 
 /**
  * Braintree gateway
  * @param {IConfig} braintreeConfig - Configuration for the Braintree
  */
-export function Payments(braintreeConfig: IConfig) {
+export function Payments(braintreeConfig: IConfig, currencies: ICurrency[] = []) {
   const btGateway = new Braintree(braintreeConfig);
   btGateway.connect();
+  btGateway.setCurrencies(currencies);
   return btGateway;
 }
 
@@ -19,16 +22,16 @@ export function Payments(braintreeConfig: IConfig) {
  * @param braintreeConfig Configuration for the braintree
  */
 export function Checkout(braintreeConfig: IConfig) {
-  const simplifier = new Simplifier(braintreeConfig);
-  return simplifier;
+  const checkout = new CheckoutHelper(braintreeConfig);
+  return checkout;
 }
 
 /**
  * Gets the enviroment
  * @param {String} environmentName Environment name: Sandbox | Qa | Production
  */
-export function getEnvironment(environmentName: string) {
-  const environment = Environment.get(environmentName);
+export function Environment(environmentName: string) {
+  const environment = EnvironmentHelper.get(environmentName);
   if (!environment) { return null; }
   return environment;
 }
