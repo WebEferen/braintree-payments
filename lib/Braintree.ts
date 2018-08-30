@@ -15,13 +15,19 @@ import ICurrency from './interfaces/ICurrency';
 export default class Braintree {
 
     private config: IConfig;
+    private currencies: ICurrency[];
+    private defaultCurrency: string;
     private gateway: any;
 
     /**
      * Braintree Module constructor
      * @param config Config for the braintree
+     * @param {ICurrency[]} currencies Currencies collection
+     * @param {string | null} defaultCurrency Default currency name (eg. 'EUR')
      */
-    constructor(config: IConfig) {
+    constructor(config: IConfig, currencies: ICurrency[], defaultCurrency: string) {
+        this.defaultCurrency = defaultCurrency;
+        this.currencies = currencies;
         this.config = config;
         return this;
     }
@@ -31,6 +37,15 @@ export default class Braintree {
      */
     public connect() {
         this.gateway = braintree.connect(this.config);
+    }
+
+    /**
+     * Sets actual currencies
+     */
+    public setConfig() {
+        this.gateway.config = this.config;
+        this.gateway.config.currencies = this.currencies;
+        this.gateway.config.defaultCurrency = this.defaultCurrency;
     }
 
     /**
@@ -59,6 +74,10 @@ export default class Braintree {
     public getModule(moduleName: string) {
         if (this.getGateway().hasOwnProperty(moduleName)) {
             const gateway = this.getGateway()[moduleName];
+
+            gateway.config.config = this.config;
+            gateway.config.currencies = this.currencies;
+            gateway.config.defaultCurrency = this.defaultCurrency;
 
             switch (moduleName) {
                 case 'customer':
@@ -89,21 +108,5 @@ export default class Braintree {
     public getGateway(gateway: string | null = null) {
         if (gateway) { return this.gateway[gateway]; }
         return this.gateway;
-    }
-
-    /**
-     * Sets currency accounts
-     * @param {ICurrency[]} currencies Currencies object
-     */
-    public setCurrencies(currencies: ICurrency[]) {
-        this.gateway.currencies = currencies;
-    }
-
-    /**
-     * Sets default currency
-     * @param currency Currency
-     */
-    public setDefaultCurrency(currency: string) {
-        this.gateway.defaultCurrency = currency;
     }
 }

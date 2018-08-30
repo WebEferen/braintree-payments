@@ -1,29 +1,20 @@
 import Braintree from './lib/Braintree';
 
-import CheckoutHelper from './lib/helpers/CheckoutHelper';
 import EnvironmentHelper from './lib/helpers/EnvironmentHelper';
-
 import IConfig from './lib/interfaces/IConfig';
 import ICurrency from './lib/interfaces/ICurrency';
 
 /**
- * Braintree gateway
- * @param {IConfig} braintreeConfig - Configuration for the Braintree
+ * Braintree Payments Module
+ * @param braintreeConfig Config of the braintree
+ * @param currencies Currencies collection
+ * @param defaultCurrency Specify default currency (eg. 'EUR')
  */
-export function Payments(braintreeConfig: IConfig, currencies: ICurrency[] = []) {
-  const btGateway = new Braintree(braintreeConfig);
+export function Payments(braintreeConfig: IConfig, currencies: ICurrency[], defaultCurrency: string = 'EUR') {
+  const btGateway = new Braintree(braintreeConfig, currencies, defaultCurrency);
   btGateway.connect();
-  btGateway.setCurrencies(currencies);
+  btGateway.setConfig();
   return btGateway;
-}
-
-/**
- * Fast checkout helper
- * @param braintreeConfig Configuration for the braintree
- */
-export function Checkout(braintreeConfig: IConfig) {
-  const checkout = new CheckoutHelper(braintreeConfig);
-  return checkout;
 }
 
 /**

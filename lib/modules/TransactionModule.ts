@@ -18,13 +18,17 @@ export default class TransactionModule extends Module {
    * @param {ITransaction} newTransaction Transaction object
    */
   public async sale(newTransaction: ITransaction) {
-    if (!newTransaction.merchantAccountId) {
-      newTransaction.merchantAccountId = super.getDefaultCurrency().account;
-    }
-
     const validator = new TransactionValidator(newTransaction);
     if (validator.verify()) {
+
+      /* istanbul ignore next */
+      if (!newTransaction.merchantAccountId) {
+        newTransaction.merchantAccountId = super.getDefaultCurrency().account;
+      }
+
       [this.error, this.result] = await to(super.getInstance().sale(newTransaction));
+      /* istanbul ignore next */
+      if (this.error) { return {success: false, error: this.error.type}; }
       return {success: this.result.success, transaction: this.result.transaction as ITransaction};
     }
     return {success: false, error: 'VerificationFailed'};

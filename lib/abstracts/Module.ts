@@ -26,18 +26,25 @@ export default abstract class Module {
    * Gets currencies object
    */
   protected getCurrencies() {
-    return this.instance.currencies;
+    return this.getConfig().currencies as ICurrency[];
+  }
+
+  /**
+   * Gets config object
+   */
+  protected getConfig() {
+    return this.getInstance().config;
   }
 
   /**
    * Gets default currency account
    */
   protected getDefaultCurrency() {
-    const currency = this.instance.defaultCurrency;
+    const currency = this.getConfig().defaultCurrency;
     const foundedCurrency = this.getCurrency(currency);
-    if (foundedCurrency) {
-      return foundedCurrency as ICurrency;
-    }
+    /* istanbul ignore next */
+    if (foundedCurrency) { return foundedCurrency as ICurrency; }
+    /* istanbul ignore next */
     return this.getCurrencies()[0] as ICurrency;
   }
 
@@ -48,6 +55,7 @@ export default abstract class Module {
    */
   protected getCurrency(currency: string) {
     const foundedCurrency = _.find(this.getCurrencies(), {currency});
+    /* istanbul ignore next */
     return (foundedCurrency) ? foundedCurrency as ICurrency : undefined;
   }
 

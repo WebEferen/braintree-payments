@@ -4,7 +4,7 @@ const config = require('./config');
 const mockups = config.mockups;
 
 const Braintree = require('../dist/index.js');
-const Payments = Braintree.Payments(config.payments);
+const Payments = Braintree.Payments(config.payments, config.currencies, 'EUR');
 const PaymentMethod = Payments.getModule('paymentMethod');
 const PaymentMethodNonce = Payments.getModule('paymentMethodNonce');
 
