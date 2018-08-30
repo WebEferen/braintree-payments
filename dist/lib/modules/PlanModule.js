@@ -20,12 +20,13 @@ class PlanModule extends Module_1.default {
     }
     /**
      * Gets all of the plans from the braintree
+     * @returns {success: true, plans: IPlan}
      */
     all() {
         const _super = name => super[name];
         return __awaiter(this, void 0, void 0, function* () {
             const plansCollection = yield _super("getInstance").call(this).all();
-            return { success: true, plans: plansCollection };
+            return plansCollection;
         });
     }
     /**
@@ -33,9 +34,8 @@ class PlanModule extends Module_1.default {
      * @param planId Plan unique index (from braintree)
      */
     find(planId) {
-        const _super = name => super[name];
         return __awaiter(this, void 0, void 0, function* () {
-            const all = yield _super("getInstance").call(this).all();
+            const all = yield this.all();
             const foundedPlan = _.find(all.plans, (plan) => plan.id === planId);
             if (foundedPlan) {
                 return { success: true, plan: foundedPlan };

@@ -8,11 +8,9 @@ export default class PlanModule extends Module {
     constructor(instance: any);
     /**
      * Gets all of the plans from the braintree
+     * @returns {success: true, plans: IPlan}
      */
-    all(): Promise<{
-        success: boolean;
-        plans: any;
-    }>;
+    all(): Promise<any>;
     /**
      * Finds specific plan in the braintree plans
      * @param planId Plan unique index (from braintree)

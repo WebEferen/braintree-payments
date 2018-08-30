@@ -9,10 +9,7 @@ export default class AddOnModule extends Module {
     /**
      * Gets all of the addons from the braintree
      */
-    all(): Promise<{
-        success: boolean;
-        addOns: any;
-    }>;
+    all(): Promise<any>;
     /**
      * Finds specific addon in the braintree addons
      * @param addonId Addon unique index (from braintree)

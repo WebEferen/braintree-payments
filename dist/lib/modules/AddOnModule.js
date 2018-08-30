@@ -25,7 +25,7 @@ class AddOnModule extends Module_1.default {
         const _super = name => super[name];
         return __awaiter(this, void 0, void 0, function* () {
             const addOnsCollection = yield _super("getInstance").call(this).all();
-            return { success: true, addOns: addOnsCollection };
+            return addOnsCollection;
         });
     }
     /**
@@ -33,9 +33,8 @@ class AddOnModule extends Module_1.default {
      * @param addonId Addon unique index (from braintree)
      */
     find(addonId) {
-        const _super = name => super[name];
         return __awaiter(this, void 0, void 0, function* () {
-            const all = yield _super("getInstance").call(this).all();
+            const all = yield this.all();
             const foundedAddon = _.find(all.addOns, (addOn) => addOn.id === addonId);
             if (foundedAddon) {
                 return { success: true, addOn: foundedAddon };

@@ -17,7 +17,7 @@ export default class AddOnModule extends Module {
    */
   public async all() {
     const addOnsCollection = await super.getInstance().all();
-    return {success: true, addOns: addOnsCollection.addOns};
+    return addOnsCollection;
   }
 
   /**
