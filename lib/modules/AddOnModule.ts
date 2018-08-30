@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import Module from '../helpers/Module';
+import Module from '../abstracts/Module';
 import IAddOn from '../interfaces/IAddOn';
 
 export default class AddOnModule extends Module {

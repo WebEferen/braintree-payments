@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import Module from '../helpers/Module';
+import Module from '../abstracts/Module';
 import IPlan from '../interfaces/IPlan';
 
 export default class PlanModule extends Module {

@@ -1,5 +1,5 @@
 import to from 'await-to-js';
-import Module from '../helpers/Module';
+import Module from '../abstracts/Module';
 import ITransaction from '../interfaces/ITransaction';
 import TransactionValidator from '../validators/TransactionValidator';
 

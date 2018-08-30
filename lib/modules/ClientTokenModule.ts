@@ -1,4 +1,4 @@
-import Module from '../helpers/Module';
+import Module from '../abstracts/Module';
 
 export default class ClientTokenModule extends Module {
 

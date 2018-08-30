@@ -1,4 +1,4 @@
-import Validator from '../helpers/Validator';
+import Validator from '../abstracts/Validator';
 
 export default class CustomerValidator extends Validator {
 

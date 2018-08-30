@@ -1,4 +1,5 @@
 import * as braintree from 'braintree';
+import * as _ from 'lodash';
 
 import AddOnModule from './modules/AddOnModule';
 import ClientTokenModule from './modules/ClientTokenModule';
@@ -97,5 +98,20 @@ export default class Braintree {
      */
     public setCurrencies(currencies: ICurrency[]) {
         this.gateway.currencies = currencies;
+    }
+
+    /**
+     * Sets default currency
+     * @param currency Currency
+     */
+    public setDefaultCurrency(currency: string) {
+        this.gateway.defaultCurrency = _.find(this.gateway.currencies, {currency});
+    }
+
+    /**
+     * Gets default currency
+     */
+    public getDefaultCurrency() {
+        return this.gateway.defaultCurrency;
     }
 }

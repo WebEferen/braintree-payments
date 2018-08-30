@@ -1,5 +1,5 @@
 import {to} from 'await-to-js';
-import Module from '../helpers/Module';
+import Module from '../abstracts/Module';
 import IPaymentMethod from '../interfaces/IPaymentMethod';
 import PaymentMethodValidator from '../validators/PaymentMethodValidator';
 

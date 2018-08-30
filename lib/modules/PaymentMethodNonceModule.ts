@@ -1,5 +1,5 @@
 import {to} from 'await-to-js';
-import Module from '../helpers/Module';
+import Module from '../abstracts/Module';
 
 export default class PaymentMethodNonceModule extends Module {
 

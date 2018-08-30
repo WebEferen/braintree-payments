@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-export default class Validator {
+export default abstract class Validator {
 
   public verifyPattern: string[];
   public modelToVerify: object;
