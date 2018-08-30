@@ -1,3 +1,3 @@
-const {Payments, Environment} = require('./dist/index')();
-module.exports.Payments = Payments;
-module.exports.Environment = Environment;
+const Braintree = require('./dist/index');
+module.exports.Payments = Braintree.Payments;
+module.exports.Environment = Braintree.Environment;
