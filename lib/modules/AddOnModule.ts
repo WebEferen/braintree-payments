@@ -17,7 +17,7 @@ export default class AddOnModule extends Module {
    */
   public async all() {
     const addOnsCollection = await super.getInstance().all();
-    return {success: true, addOns: addOnsCollection};
+    return {success: true, addOns: addOnsCollection.addOns};
   }
 
   /**
@@ -25,7 +25,7 @@ export default class AddOnModule extends Module {
    * @param addonId Addon unique index (from braintree)
    */
   public async find(addonId: string) {
-    const all = await super.getInstance().all();
+    const all = await this.all();
     const foundedAddon = _.find(all.addOns, (addOn: IAddOn) => addOn.id === addonId);
     if (foundedAddon) { return {success: true, addOn: foundedAddon as IAddOn}; }
     return {success: false, error: 'NotFound'};

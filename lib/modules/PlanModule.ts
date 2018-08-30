@@ -17,7 +17,7 @@ export default class PlanModule extends Module {
    */
   public async all() {
     const plansCollection = await super.getInstance().all();
-    return {success: true, plans: plansCollection};
+    return {success: true, plans: plansCollection.plans};
   }
 
   /**
