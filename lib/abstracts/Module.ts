@@ -30,6 +30,18 @@ export default abstract class Module {
   }
 
   /**
+   * Gets default currency account
+   */
+  protected getDefaultCurrency() {
+    const currency = this.instance.defaultCurrency;
+    const foundedCurrency = this.getCurrency(currency);
+    if (foundedCurrency) {
+      return foundedCurrency;
+    }
+    return this.getCurrencies()[0];
+  }
+
+  /**
    * Get specific currency
    * @param currency Currency short name in uppercase (eg. USD)
    * @returns Returns ICurrency object if found othervise undefined
