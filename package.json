@@ -5,6 +5,8 @@
   "main": "dist/index",
   "types": "dist/index",
   "scripts": {
+    "prepare": "npm run clear && npm run build && echo Prepare works",
+    "postinstall": "npm run clear && npm run build && echo Install works",
     "tslint": "./node_modules/.bin/tslint -p tsconfig.json || exit 0",
     "tslint-fix": "./node_modules/.bin/tslint -p tsconfig.json --fix || exit 0",
     "mocha": "./node_modules/.bin/mocha --timeout 5000 --reporter spec || exit 0",
@@ -13,7 +15,7 @@
     "test-build": "npm run clear && npm run build && npm run mocha",
     "test-production": "npm run tslint && npm test",
     "test-coverage": "./node_modules/.bin/nyc --reporter=html --reporter=text npm run test-build || exit 0",
-    "clear": "rimraf ./dist",
+    "clear": "./node_modules/.bin/rimraf ./dist",
     "generate-documentation": "./node_modules/.bin/typedoc --out docs --exclude node_modules"
   },
   "engines": {
