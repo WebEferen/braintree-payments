@@ -26,7 +26,7 @@ npm test
 First of all we have to specify the braintree module instance and paste the configuration inside **Payments** constructor.
 
 ```javascript
-const Payments = Braintree.Payments(configuration);
+const Payments = Braintree.Payments(configuration, currencies, defaultCurrency = 'EUR');
 ```
 
 > Inside configuration we will have to specify some params
@@ -38,4 +38,14 @@ const configuration = {
   publicKey: 'PublicKey',
   privateKey: 'PrivateKey'
 };
+```
+
+> Inside currencies we will have to specify multiple merchant accounts for multiple currencies
+
+```javascript
+const currencies = [
+  { currency: 'EUR', account: 'braintreeAccountIdForEur' },
+  { currency: 'USD', account: 'braintreeAccountIdForUsd' },
+  { currency: 'PLN', account: 'braintreeAccountIdForPln' }
+];
 ```
