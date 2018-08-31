@@ -1,6 +1,6 @@
 {
   "name": "braintree-payments",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "Typescript Braintree Payments",
   "main": "dist/index",
   "types": "dist/index",
@@ -8,12 +8,12 @@
     "postinstall": "npm run build",
     "tslint": "./node_modules/.bin/tslint -p tsconfig.json || exit 0",
     "mocha": "./node_modules/.bin/mocha --timeout 5000 --reporter spec || exit 0",
+    "documentation": "./node_modules/.bin/typedoc --out docs --exclude node_modules",
+    "nyc": "./node_modules/.bin/nyc --reporter=html --reporter=text",
+    "clear": "./node_modules/.bin/rimraf ./dist",
     "build": "./node_modules/.bin/tsc",
     "test": "npm run clear && npm run build && npm run mocha",
-    "test-production": "npm run tslint && npm test",
-    "test-coverage": "./node_modules/.bin/nyc --reporter=html --reporter=text npm run test || exit 0",
-    "clear": "./node_modules/.bin/rimraf ./dist",
-    "generate-documentation": "./node_modules/.bin/typedoc --out docs --exclude node_modules"
+    "test-coverage": "npm run clear && npm run nyc npm run test || exit 0"
   },
   "engines": {
     "node": "8.9.4"
