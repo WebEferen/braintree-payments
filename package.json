@@ -1,20 +1,19 @@
 {
   "name": "braintree-payments",
-  "version": "2.1.0",
+  "version": "2.3.0",
   "description": "Typescript Braintree Payments",
   "main": "dist/index",
   "types": "dist/index",
   "scripts": {
+    "postinstall": "npm run build",
     "tslint": "./node_modules/.bin/tslint -p tsconfig.json || exit 0",
-    "tslint-fix": "./node_modules/.bin/tslint -p tsconfig.json --fix || exit 0",
     "mocha": "./node_modules/.bin/mocha --timeout 5000 --reporter spec || exit 0",
+    "documentation": "./node_modules/.bin/typedoc --out docs --exclude node_modules",
+    "nyc": "./node_modules/.bin/nyc --reporter=html --reporter=text",
+    "clear": "./node_modules/.bin/rimraf ./dist",
     "build": "./node_modules/.bin/tsc",
-    "test": "npm run clear && npm run test-build",
-    "test-build": "npm run clear && npm run build && npm run mocha",
-    "test-production": "npm run tslint && npm test",
-    "test-coverage": "./node_modules/.bin/nyc --reporter=html --reporter=text npm run test-build || exit 0",
-    "clear": "rimraf ./dist",
-    "generate-documentation": "./node_modules/.bin/typedoc --out docs --exclude node_modules"
+    "test": "npm run clear && npm run build && npm run mocha",
+    "test-coverage": "npm run clear && npm run nyc npm run test || exit 0"
   },
   "engines": {
     "node": "8.9.4"
@@ -32,11 +31,11 @@
   "dependencies": {
     "await-to-js": "^2.0.1",
     "braintree": "^2.12.0",
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.10",
+    "@types/lodash": "^4.14.116",
+    "@types/node": "^10.7.1"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.116",
-    "@types/node": "^10.7.1",
     "chai": "^4.1.2",
     "mocha": "^5.2.0",
     "nyc": "^12.0.2",

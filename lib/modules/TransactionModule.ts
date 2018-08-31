@@ -1,5 +1,5 @@
 import to from 'await-to-js';
-import Module from '../helpers/Module';
+import Module from '../abstracts/Module';
 import ITransaction from '../interfaces/ITransaction';
 import TransactionValidator from '../validators/TransactionValidator';
 
@@ -20,7 +20,15 @@ export default class TransactionModule extends Module {
   public async sale(newTransaction: ITransaction) {
     const validator = new TransactionValidator(newTransaction);
     if (validator.verify()) {
+
+      /* istanbul ignore next */
+      if (!newTransaction.merchantAccountId) {
+        newTransaction.merchantAccountId = super.getDefaultCurrency().account;
+      }
+
       [this.error, this.result] = await to(super.getInstance().sale(newTransaction));
+      /* istanbul ignore next */
+      if (this.error) { return {success: false, error: this.error.type}; }
       return {success: this.result.success, transaction: this.result.transaction as ITransaction};
     }
     return {success: false, error: 'VerificationFailed'};

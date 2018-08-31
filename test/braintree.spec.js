@@ -3,7 +3,18 @@
 const config = require('./config.js');
 const expect = require('chai').expect;
 const Braintree = require('../dist/index.js');
-const Payments = Braintree.Payments(config.payments);
+const Payments = Braintree.Payments(config.payments, config.currencies, 'EUR');
+
+describe('Payments Method', () => {
+  it('should NOT set Payments module', () => {
+    const payments = Braintree.Payments(config.payments);
+    expect(payments).to.throw;
+  });
+  it('should set Payments module (EUR)', () => {
+    const payments = Braintree.Payments(config.payments, config.currencies, 'EUR');
+    expect(payments).to.be.an('object');
+  });
+});
 
 describe('Modules', () => {
   it('should contain customer module', (done) => {

@@ -4,8 +4,15 @@ const payments = {
   merchantId: 'wjdxkr5mydq87nnw',
   publicKey: 'h8zctcyn9tfqkbn7',
   privateKey: 'd5c10a011b4c23d7aaf9953f5fa6f5e8',
-  environment: braintree.Environment['Sandbox']
+  environment: braintree.Environment['Sandbox'],
+  defaultAccount: 'loomicodemichamakowski',
+  defaultCurrency: 'EUR'
 };
+
+const currencies = [
+  { currency: 'EUR', account: 'adtype-eur' }, 
+  { currency: 'USD', account: 'adtype-usd' }
+];
 
 const customerId = 'testCustomerId';
 const planId = 'basicAnalyticsPlan';
@@ -103,4 +110,4 @@ const mockups = {
 
 };
 
-module.exports = {payments, mockups};
+module.exports = {payments, currencies, mockups};

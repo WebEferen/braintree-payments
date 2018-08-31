@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import Module from '../helpers/Module';
+import Module from '../abstracts/Module';
 import IPlan from '../interfaces/IPlan';
 
 export default class PlanModule extends Module {
@@ -14,10 +14,11 @@ export default class PlanModule extends Module {
 
   /**
    * Gets all of the plans from the braintree
+   * @returns {success: true, plans: IPlan}
    */
   public async all() {
     const plansCollection = await super.getInstance().all();
-    return {success: true, plans: plansCollection};
+    return plansCollection;
   }
 
   /**
@@ -25,7 +26,7 @@ export default class PlanModule extends Module {
    * @param planId Plan unique index (from braintree)
    */
   public async find(planId: string) {
-    const all = await super.getInstance().all();
+    const all = await this.all();
     const foundedPlan = _.find(all.plans, (plan: IPlan) => plan.id === planId);
     if (foundedPlan) { return {success: true, plan: foundedPlan as IPlan}; }
     return {success: false, error: 'NotFound'};

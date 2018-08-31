@@ -1,5 +1,5 @@
 import {to} from 'await-to-js';
-import Module from '../helpers/Module';
+import Module from '../abstracts/Module';
 import ISubscription from '../interfaces/ISubscription';
 import SubscriptionValidator from '../validators/SubscriptionValidator';
 
@@ -20,6 +20,11 @@ export default class SubscriptionModule extends Module {
   public async create(newSubscription: ISubscription) {
     const validator = new SubscriptionValidator(newSubscription);
     if (validator.verify()) {
+      /* istanbul ignore next */
+      if (!newSubscription.merchantAccountId) {
+        newSubscription.merchantAccountId = super.getDefaultCurrency().account;
+      }
+
       [this.error, this.result] = await to(super.getInstance().create(newSubscription));
       /* istanbul ignore if */
       if (this.error) { return {success: false, error: this.error.type}; }

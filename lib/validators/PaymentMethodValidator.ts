@@ -1,5 +1,6 @@
-import Validator from '../helpers/Validator';
+import Validator from '../abstracts/Validator';
 
+/* istanbul ignore next */
 export default class PaymentMethodValidator extends Validator {
 
   public verifyPattern = ['customerId', 'paymentMethodNonce'];

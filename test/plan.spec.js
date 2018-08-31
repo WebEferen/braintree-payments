@@ -5,7 +5,7 @@ const mockups = config.mockups;
 const expect = chai.expect;
 
 const Braintree = require('../dist/index.js');
-const Payments = Braintree.Payments(config.payments);
+const Payments = Braintree.Payments(config.payments, config.currencies, 'EUR');
 const Plan = Payments.getModule('plan');
 
 describe('Plan', () => {
