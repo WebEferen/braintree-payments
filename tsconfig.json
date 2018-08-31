@@ -6,7 +6,7 @@
     "outDir": "./dist",
     "sourceMap": true,
     "strict": true,
-    "typeRoots": ["./typings"],
+    "typeRoots": ["./typings", "./node_modules/@types"],
     "types": ["node", "lodash"]
   },
   "exclude": [
