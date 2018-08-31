@@ -5,8 +5,7 @@
   "main": "dist/index",
   "types": "dist/index",
   "scripts": {
-    "prepare": "npm run clear && npm run build && echo Prepare works",
-    "postinstall": "npm run clear && npm run build && echo Install works",
+    "postinstall": "npm run build",
     "tslint": "./node_modules/.bin/tslint -p tsconfig.json || exit 0",
     "tslint-fix": "./node_modules/.bin/tslint -p tsconfig.json --fix || exit 0",
     "mocha": "./node_modules/.bin/mocha --timeout 5000 --reporter spec || exit 0",
