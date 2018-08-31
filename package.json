@@ -13,7 +13,7 @@
     "clear": "./node_modules/.bin/rimraf ./dist",
     "build": "./node_modules/.bin/tsc",
     "test": "npm run clear && npm run build && npm run mocha",
-    "test-coverage": "npm run clear && npm run nyc npm run test || exit 0"
+    "test-coverage": "npm run nyc npm run test || exit 0"
   },
   "engines": {
     "node": "8.9.4"
