@@ -31,11 +31,11 @@
   "dependencies": {
     "await-to-js": "^2.0.1",
     "braintree": "^2.12.0",
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.10",
+    "@types/lodash": "^4.14.116",
+    "@types/node": "^10.7.1"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.116",
-    "@types/node": "^10.7.1",
     "chai": "^4.1.2",
     "mocha": "^5.2.0",
     "nyc": "^12.0.2",
