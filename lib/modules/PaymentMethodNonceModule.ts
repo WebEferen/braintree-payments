@@ -17,7 +17,7 @@ export default class PaymentMethodNonceModule extends Module {
    */
   public async create(paymentMethodToken: string) {
     [this.error, this.result] = await to(super.getInstance().create(paymentMethodToken));
-    if (this.error) { return {success: false, error: this.error.type}; }
+    if (this.error) { return {success: false, type: this.error.type, message: this.error.message}; }
     return this.result;
   }
 

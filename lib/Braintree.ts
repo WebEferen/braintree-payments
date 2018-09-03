@@ -1,6 +1,7 @@
 import * as braintree from 'braintree';
 
 import AddOnModule from './modules/AddOnModule';
+import AddressModule from './modules/AddressModule';
 import ClientTokenModule from './modules/ClientTokenModule';
 import CustomerModule from './modules/CustomerModule';
 import PaymentMethodModule from './modules/PaymentMethodModule';
@@ -96,6 +97,8 @@ export default class Braintree {
                     return new PaymentMethodNonceModule(gateway);
                 case 'addOn':
                     return new AddOnModule(gateway);
+                case 'address':
+                    return new AddressModule(gateway);
             }
         }
         return undefined;
