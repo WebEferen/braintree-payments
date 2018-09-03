@@ -12,7 +12,7 @@ export default class ClientTokenModule extends Module {
 
   /**
    * Generates payment token for the given customer
-   * @param customerId Customer unique id
+   * @param {string} customerId Customer unique id
    */
   public async generateByCustomerId(customerId: string) {
     if (!customerId) { return {success: false, error: 'ValidationError'}; }

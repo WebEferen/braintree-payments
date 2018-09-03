@@ -22,7 +22,7 @@ export default class AddOnModule extends Module {
 
   /**
    * Finds specific addon in the braintree addons
-   * @param addonId Addon unique index (from braintree)
+   * @param {string} addonId Addon unique index (from braintree)
    */
   public async find(addonId: string) {
     const all = await this.all();

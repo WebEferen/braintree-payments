@@ -30,7 +30,7 @@ export default class CustomerModule extends Module {
 
   /**
    * Finds specific customer inside braintree database
-   * @param {String} customerId Customer unique index
+   * @param {string} customerId Customer unique index
    */
   public async find(customerId: string) {
     [this.error, this.result] = await to(super.getInstance().find(customerId));
@@ -40,7 +40,7 @@ export default class CustomerModule extends Module {
 
   /**
    * Updates specific customer inside braintree database
-   * @param {String} customerId Customer unique index
+   * @param {string} customerId Customer unique index
    * @param {ICustomer} updatedCustomer Customer object
    */
   public async update(customerId: string, updatedCustomer: ICustomer) {
@@ -51,7 +51,7 @@ export default class CustomerModule extends Module {
 
   /**
    * Deletes specific customer from braintree database
-   * @param {String} customerId Customer unique index
+   * @param {string} customerId Customer unique index
    */
   public async delete(customerId: string) {
     [this.error, this.result] = await to(super.getInstance().delete(customerId));

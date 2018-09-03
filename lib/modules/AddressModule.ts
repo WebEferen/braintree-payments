@@ -56,8 +56,8 @@ export default class AddressModule extends Module {
 
   /**
    * Deletes specific address pinned to speciifc customer
-   * @param customerId Customer unique index
-   * @param addressId Address unique index
+   * @param {string} customerId Customer unique index
+   * @param {string} addressId Address unique index
    */
   public async delete(customerId: string, addressId: string) {
     [this.error, this.result] = await to(super.getInstance().delete(customerId, addressId));

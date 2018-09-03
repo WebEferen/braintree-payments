@@ -44,7 +44,7 @@ export default class TransactionModule extends Module {
 
   /**
    * Refunds transaction by the unique transaction id
-   * @param {String} transactionId Transaction unique ID
+   * @param {string} transactionId Transaction unique ID
    */
   public async refund(transactionId: string) {
     [this.error, this.result] = await to(super.getInstance().refund(transactionId));
@@ -54,7 +54,7 @@ export default class TransactionModule extends Module {
 
   /**
    * Cancels transaction lock by the unique transaction id
-   * @param {String} transactionId Transaction unique ID
+   * @param {string} transactionId Transaction unique ID
    */
   public async cancelRelease(transactionId: string) {
     [this.error, this.result] = await to(super.getInstance().cancelRelease(transactionId));
