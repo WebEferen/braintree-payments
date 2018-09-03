@@ -91,6 +91,8 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_lib_braintree_.braintree.html#config" class="tsd-kind-icon">config</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_lib_braintree_.braintree.html#currencies" class="tsd-kind-icon">currencies</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_lib_braintree_.braintree.html#defaultcurrency" class="tsd-kind-icon">default<wbr>Currency</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_lib_braintree_.braintree.html#gateway" class="tsd-kind-icon">gateway</a></li>
 							</ul>
 						</section>
@@ -101,6 +103,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_braintree_.braintree.html#getconfig" class="tsd-kind-icon">get<wbr>Config</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_braintree_.braintree.html#getgateway" class="tsd-kind-icon">get<wbr>Gateway</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_braintree_.braintree.html#getmodule" class="tsd-kind-icon">get<wbr>Module</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_braintree_.braintree.html#setconfig" class="tsd-kind-icon">set<wbr>Config</a></li>
 							</ul>
 						</section>
 					</div>
@@ -112,13 +115,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Braintree<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_interfaces_iconfig_.iconfig.html" class="tsd-signature-type">IConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_lib_braintree_.braintree.html" class="tsd-signature-type">Braintree</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Braintree<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_interfaces_iconfig_.iconfig.html" class="tsd-signature-type">IConfig</a>, currencies<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_interfaces_icurrency_.icurrency.html" class="tsd-signature-type">ICurrency</a><span class="tsd-signature-symbol">[]</span>, defaultCurrency<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_lib_braintree_.braintree.html" class="tsd-signature-type">Braintree</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in lib/Braintree.ts:16</li>
+									<li>Defined in lib/Braintree.ts:21</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -136,6 +139,22 @@
 										</div>
 									</div>
 								</li>
+								<li>
+									<h5>currencies: <a href="../interfaces/_lib_interfaces_icurrency_.icurrency.html" class="tsd-signature-type">ICurrency</a><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Currencies collection</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5>defaultCurrency: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Default currency name (eg. &#39;EUR&#39;)</p>
+										</div>
+									</div>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_lib_braintree_.braintree.html" class="tsd-signature-type">Braintree</a></h4>
 						</li>
@@ -150,7 +169,27 @@
 					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_lib_interfaces_iconfig_.iconfig.html" class="tsd-signature-type">IConfig</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in lib/Braintree.ts:15</li>
+							<li>Defined in lib/Braintree.ts:18</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="currencies" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> currencies</h3>
+					<div class="tsd-signature tsd-kind-icon">currencies<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_lib_interfaces_icurrency_.icurrency.html" class="tsd-signature-type">ICurrency</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in lib/Braintree.ts:19</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="defaultcurrency" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> default<wbr>Currency</h3>
+					<div class="tsd-signature tsd-kind-icon">default<wbr>Currency<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in lib/Braintree.ts:20</li>
 						</ul>
 					</aside>
 				</section>
@@ -160,7 +199,7 @@
 					<div class="tsd-signature tsd-kind-icon">gateway<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in lib/Braintree.ts:16</li>
+							<li>Defined in lib/Braintree.ts:21</li>
 						</ul>
 					</aside>
 				</section>
@@ -177,7 +216,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in lib/Braintree.ts:30</li>
+									<li>Defined in lib/Braintree.ts:39</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -199,7 +238,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in lib/Braintree.ts:38</li>
+									<li>Defined in lib/Braintree.ts:56</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -230,7 +269,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in lib/Braintree.ts:85</li>
+									<li>Defined in lib/Braintree.ts:111</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -255,13 +294,13 @@
 					<a name="getmodule" class="tsd-anchor"></a>
 					<h3>get<wbr>Module</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Module<span class="tsd-signature-symbol">(</span>moduleName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="_lib_modules_addonmodule_.addonmodule.html" class="tsd-signature-type">AddOnModule</a><span class="tsd-signature-symbol"> | </span><a href="_lib_modules_clienttokenmodule_.clienttokenmodule.html" class="tsd-signature-type">ClientTokenModule</a><span class="tsd-signature-symbol"> | </span><a href="_lib_modules_customermodule_.customermodule.html" class="tsd-signature-type">CustomerModule</a><span class="tsd-signature-symbol"> | </span><a href="_lib_modules_paymentmethodmodule_.paymentmethodmodule.html" class="tsd-signature-type">PaymentMethodModule</a><span class="tsd-signature-symbol"> | </span><a href="_lib_modules_planmodule_.planmodule.html" class="tsd-signature-type">PlanModule</a><span class="tsd-signature-symbol"> | </span><a href="_lib_modules_subscriptionmodule_.subscriptionmodule.html" class="tsd-signature-type">SubscriptionModule</a><span class="tsd-signature-symbol"> | </span><a href="_lib_modules_transactionmodule_.transactionmodule.html" class="tsd-signature-type">TransactionModule</a></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Module<span class="tsd-signature-symbol">(</span>moduleName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="_lib_modules_addonmodule_.addonmodule.html" class="tsd-signature-type">AddOnModule</a><span class="tsd-signature-symbol"> | </span><a href="_lib_modules_addressmodule_.addressmodule.html" class="tsd-signature-type">AddressModule</a><span class="tsd-signature-symbol"> | </span><a href="_lib_modules_clienttokenmodule_.clienttokenmodule.html" class="tsd-signature-type">ClientTokenModule</a><span class="tsd-signature-symbol"> | </span><a href="_lib_modules_customermodule_.customermodule.html" class="tsd-signature-type">CustomerModule</a><span class="tsd-signature-symbol"> | </span><a href="_lib_modules_paymentmethodmodule_.paymentmethodmodule.html" class="tsd-signature-type">PaymentMethodModule</a><span class="tsd-signature-symbol"> | </span><a href="_lib_modules_paymentmethodnoncemodule_.paymentmethodnoncemodule.html" class="tsd-signature-type">PaymentMethodNonceModule</a><span class="tsd-signature-symbol"> | </span><a href="_lib_modules_planmodule_.planmodule.html" class="tsd-signature-type">PlanModule</a><span class="tsd-signature-symbol"> | </span><a href="_lib_modules_subscriptionmodule_.subscriptionmodule.html" class="tsd-signature-type">SubscriptionModule</a><span class="tsd-signature-symbol"> | </span><a href="_lib_modules_transactionmodule_.transactionmodule.html" class="tsd-signature-type">TransactionModule</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in lib/Braintree.ts:57</li>
+									<li>Defined in lib/Braintree.ts:75</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -282,11 +321,15 @@
 								<span class="tsd-signature-symbol"> | </span>
 								<a href="_lib_modules_addonmodule_.addonmodule.html" class="tsd-signature-type">AddOnModule</a>
 								<span class="tsd-signature-symbol"> | </span>
+								<a href="_lib_modules_addressmodule_.addressmodule.html" class="tsd-signature-type">AddressModule</a>
+								<span class="tsd-signature-symbol"> | </span>
 								<a href="_lib_modules_clienttokenmodule_.clienttokenmodule.html" class="tsd-signature-type">ClientTokenModule</a>
 								<span class="tsd-signature-symbol"> | </span>
 								<a href="_lib_modules_customermodule_.customermodule.html" class="tsd-signature-type">CustomerModule</a>
 								<span class="tsd-signature-symbol"> | </span>
 								<a href="_lib_modules_paymentmethodmodule_.paymentmethodmodule.html" class="tsd-signature-type">PaymentMethodModule</a>
+								<span class="tsd-signature-symbol"> | </span>
+								<a href="_lib_modules_paymentmethodnoncemodule_.paymentmethodnoncemodule.html" class="tsd-signature-type">PaymentMethodNonceModule</a>
 								<span class="tsd-signature-symbol"> | </span>
 								<a href="_lib_modules_planmodule_.planmodule.html" class="tsd-signature-type">PlanModule</a>
 								<span class="tsd-signature-symbol"> | </span>
@@ -294,6 +337,28 @@
 								<span class="tsd-signature-symbol"> | </span>
 								<a href="_lib_modules_transactionmodule_.transactionmodule.html" class="tsd-signature-type">TransactionModule</a>
 							</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setconfig" class="tsd-anchor"></a>
+					<h3>set<wbr>Config</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Config<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in lib/Braintree.ts:46</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets actual currencies</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -324,6 +389,12 @@
 								<a href="_lib_braintree_.braintree.html#config" class="tsd-kind-icon">config</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_lib_braintree_.braintree.html#currencies" class="tsd-kind-icon">currencies</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_lib_braintree_.braintree.html#defaultcurrency" class="tsd-kind-icon">default<wbr>Currency</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_lib_braintree_.braintree.html#gateway" class="tsd-kind-icon">gateway</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -337,6 +408,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_lib_braintree_.braintree.html#getmodule" class="tsd-kind-icon">get<wbr>Module</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_lib_braintree_.braintree.html#setconfig" class="tsd-kind-icon">set<wbr>Config</a>
 							</li>
 						</ul>
 					</li>

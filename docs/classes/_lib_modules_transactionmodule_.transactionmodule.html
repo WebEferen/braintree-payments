@@ -73,7 +73,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="_lib_helpers_module_.module.html" class="tsd-signature-type">Module</a>
+						<a href="_lib_abstracts_module_.module.html" class="tsd-signature-type">Module</a>
 						<ul class="tsd-hierarchy">
 							<li>
 								<span class="target">TransactionModule</span>
@@ -92,10 +92,11 @@
 								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="_lib_modules_transactionmodule_.transactionmodule.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-inherited">
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_lib_modules_transactionmodule_.transactionmodule.html#error" class="tsd-kind-icon">error</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_lib_modules_transactionmodule_.transactionmodule.html#mid" class="tsd-kind-icon">m<wbr>Id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_lib_modules_transactionmodule_.transactionmodule.html#result" class="tsd-kind-icon">result</a></li>
 							</ul>
 						</section>
@@ -104,6 +105,10 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_modules_transactionmodule_.transactionmodule.html#cancelrelease" class="tsd-kind-icon">cancel<wbr>Release</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_modules_transactionmodule_.transactionmodule.html#find" class="tsd-kind-icon">find</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_lib_modules_transactionmodule_.transactionmodule.html#getconfig" class="tsd-kind-icon">get<wbr>Config</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_lib_modules_transactionmodule_.transactionmodule.html#getcurrencies" class="tsd-kind-icon">get<wbr>Currencies</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_lib_modules_transactionmodule_.transactionmodule.html#getcurrency" class="tsd-kind-icon">get<wbr>Currency</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_lib_modules_transactionmodule_.transactionmodule.html#getdefaultcurrency" class="tsd-kind-icon">get<wbr>Default<wbr>Currency</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_lib_modules_transactionmodule_.transactionmodule.html#getinstance" class="tsd-kind-icon">get<wbr>Instance</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_modules_transactionmodule_.transactionmodule.html#refund" class="tsd-kind-icon">refund</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_modules_transactionmodule_.transactionmodule.html#sale" class="tsd-kind-icon">sale</a></li>
@@ -123,9 +128,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Overrides <a href="_lib_helpers_module_.module.html">Module</a>.<a href="_lib_helpers_module_.module.html#constructor">constructor</a></p>
+								<p>Overrides <a href="_lib_abstracts_module_.module.html">Module</a>.<a href="_lib_abstracts_module_.module.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in lib/modules/TransactionModule.ts:6</li>
+									<li>Defined in lib/modules/TransactionModule.ts:8</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -149,16 +154,26 @@
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="error" class="tsd-anchor"></a>
 					<h3>error</h3>
 					<div class="tsd-signature tsd-kind-icon">error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="_lib_helpers_module_.module.html">Module</a>.<a href="_lib_helpers_module_.module.html#error">error</a></p>
+						<p>Inherited from <a href="_lib_abstracts_module_.module.html">Module</a>.<a href="_lib_abstracts_module_.module.html#error">error</a></p>
 						<ul>
-							<li>Defined in lib/helpers/Module.ts:3</li>
+							<li>Defined in lib/abstracts/Module.ts:6</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="mid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> m<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">m<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;super.getDefaultCurrency().account</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in lib/modules/TransactionModule.ts:8</li>
 						</ul>
 					</aside>
 				</section>
@@ -167,9 +182,9 @@
 					<h3>result</h3>
 					<div class="tsd-signature tsd-kind-icon">result<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="_lib_helpers_module_.module.html">Module</a>.<a href="_lib_helpers_module_.module.html#result">result</a></p>
+						<p>Inherited from <a href="_lib_abstracts_module_.module.html">Module</a>.<a href="_lib_abstracts_module_.module.html#result">result</a></p>
 						<ul>
-							<li>Defined in lib/helpers/Module.ts:4</li>
+							<li>Defined in lib/abstracts/Module.ts:7</li>
 						</ul>
 					</aside>
 				</section>
@@ -186,7 +201,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in lib/modules/TransactionModule.ts:53</li>
+									<li>Defined in lib/modules/TransactionModule.ts:59</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -217,7 +232,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in lib/modules/TransactionModule.ts:33</li>
+									<li>Defined in lib/modules/TransactionModule.ts:39</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -239,6 +254,111 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a name="getconfig" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> get<wbr>Config</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Config<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="_lib_abstracts_module_.module.html">Module</a>.<a href="_lib_abstracts_module_.module.html#getconfig">getConfig</a></p>
+								<ul>
+									<li>Defined in lib/abstracts/Module.ts:35</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets config object</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a name="getcurrencies" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> get<wbr>Currencies</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Currencies<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_interfaces_icurrency_.icurrency.html" class="tsd-signature-type">ICurrency</a><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="_lib_abstracts_module_.module.html">Module</a>.<a href="_lib_abstracts_module_.module.html#getcurrencies">getCurrencies</a></p>
+								<ul>
+									<li>Defined in lib/abstracts/Module.ts:28</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets currencies object</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_lib_interfaces_icurrency_.icurrency.html" class="tsd-signature-type">ICurrency</a><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a name="getcurrency" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> get<wbr>Currency</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Currency<span class="tsd-signature-symbol">(</span>currency<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/_lib_interfaces_icurrency_.icurrency.html" class="tsd-signature-type">ICurrency</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="_lib_abstracts_module_.module.html">Module</a>.<a href="_lib_abstracts_module_.module.html#getcurrency">getCurrency</a></p>
+								<ul>
+									<li>Defined in lib/abstracts/Module.ts:56</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get specific currency</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>currency: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Currency short name in uppercase (eg. USD)</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<a href="../interfaces/_lib_interfaces_icurrency_.icurrency.html" class="tsd-signature-type">ICurrency</a>
+							</h4>
+							<p>Returns ICurrency object if found othervise undefined</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a name="getdefaultcurrency" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> get<wbr>Default<wbr>Currency</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Default<wbr>Currency<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_interfaces_icurrency_.icurrency.html" class="tsd-signature-type">ICurrency</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="_lib_abstracts_module_.module.html">Module</a>.<a href="_lib_abstracts_module_.module.html#getdefaultcurrency">getDefaultCurrency</a></p>
+								<ul>
+									<li>Defined in lib/abstracts/Module.ts:42</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets default currency account</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_lib_interfaces_icurrency_.icurrency.html" class="tsd-signature-type">ICurrency</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 					<a name="getinstance" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> get<wbr>Instance</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
@@ -247,11 +367,16 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="_lib_helpers_module_.module.html">Module</a>.<a href="_lib_helpers_module_.module.html#getinstance">getInstance</a></p>
+								<p>Inherited from <a href="_lib_abstracts_module_.module.html">Module</a>.<a href="_lib_abstracts_module_.module.html#getinstance">getInstance</a></p>
 								<ul>
-									<li>Defined in lib/helpers/Module.ts:11</li>
+									<li>Defined in lib/abstracts/Module.ts:21</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets instance</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
 						</li>
 					</ul>
@@ -266,7 +391,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in lib/modules/TransactionModule.ts:43</li>
+									<li>Defined in lib/modules/TransactionModule.ts:49</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -291,13 +416,13 @@
 					<a name="sale" class="tsd-anchor"></a>
 					<h3>sale</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">sale<span class="tsd-signature-symbol">(</span>newTransaction<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_interfaces_itransaction_.itransaction.html" class="tsd-signature-type">ITransaction</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">sale<span class="tsd-signature-symbol">(</span>newTransaction<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_interfaces_itransaction_.itransaction.html" class="tsd-signature-type">ITransaction</a>, merchantAccountId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in lib/modules/TransactionModule.ts:20</li>
+									<li>Defined in lib/modules/TransactionModule.ts:23</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -313,8 +438,14 @@
 										<p>Transaction object</p>
 									</div>
 								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> merchantAccountId: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;this.mId</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Merchant account Id from the braintree</p>
+									</div>
+								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -344,6 +475,9 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="_lib_modules_transactionmodule_.transactionmodule.html#error" class="tsd-kind-icon">error</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_lib_modules_transactionmodule_.transactionmodule.html#mid" class="tsd-kind-icon">m<wbr>Id</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="_lib_modules_transactionmodule_.transactionmodule.html#result" class="tsd-kind-icon">result</a>
 							</li>
@@ -352,6 +486,18 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_lib_modules_transactionmodule_.transactionmodule.html#find" class="tsd-kind-icon">find</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+								<a href="_lib_modules_transactionmodule_.transactionmodule.html#getconfig" class="tsd-kind-icon">get<wbr>Config</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+								<a href="_lib_modules_transactionmodule_.transactionmodule.html#getcurrencies" class="tsd-kind-icon">get<wbr>Currencies</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+								<a href="_lib_modules_transactionmodule_.transactionmodule.html#getcurrency" class="tsd-kind-icon">get<wbr>Currency</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+								<a href="_lib_modules_transactionmodule_.transactionmodule.html#getdefaultcurrency" class="tsd-kind-icon">get<wbr>Default<wbr>Currency</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 								<a href="_lib_modules_transactionmodule_.transactionmodule.html#getinstance" class="tsd-kind-icon">get<wbr>Instance</a>
