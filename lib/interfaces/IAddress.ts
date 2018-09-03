@@ -3,6 +3,7 @@ export default interface IAddress {
   company: string;
   firstName: string;
   lastName: string;
+  region: string;
   customerId: string;
   locality: string;
   postalCode: string;
