@@ -16,7 +16,8 @@ export default class ClientTokenModule extends Module {
    * @param {string} customerId Customer unique id
    * @param {string} merchantAccountId Merchant account id
    */
-  public async generateByCustomerId(customerId: string, merchantAccountId = super.getDefaultCurrency().account) {
+  public async generateByCustomerId(customerId: string, merchantAccountId: string = '') {
+    if (merchantAccountId === '') { merchantAccountId = super.getDefaultCurrency().account; }
     if (!customerId) { return {success: false, error: 'ValidationError'}; }
     [this.error, this.result] = await to(super.getInstance().generate({customerId, merchantAccountId}));
     /* istanbul ignore if */
