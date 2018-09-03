@@ -13,10 +13,11 @@ export default class ClientTokenModule extends Module {
   /**
    * Generates payment token for the given customer
    * @param {string} customerId Customer unique id
+   * @param {string} merchantAccountId Merchant account id
    */
-  public async generateByCustomerId(customerId: string) {
+  public async generateByCustomerId(customerId: string, merchantAccountId = super.getDefaultCurrency().account) {
     if (!customerId) { return {success: false, error: 'ValidationError'}; }
-    const token = await super.getInstance().generate({customerId: customerId as string});
+    const token = await super.getInstance().generate({customerId, merchantAccountId});
     return {success: true, token: token.clientToken};
   }
 
