@@ -3,9 +3,8 @@ import Validator from '../abstracts/Validator';
 export default class CustomerValidator extends Validator {
 
   public verifyPattern = [
-    'streetAddress', 'extendedAddress', 'firstName', 'lastName',
-    'postalCode', 'countryCodeAlpha2', 'customerId',
-    'locality', 'region',
+    'streetAddress', 'firstName', 'lastName',
+    'postalCode', 'locality', 'region',
   ];
 
   constructor(modelToVerify: object) {
