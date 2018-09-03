@@ -1,3 +1,4 @@
+import to from 'await-to-js';
 import Module from '../abstracts/Module';
 
 export default class ClientTokenModule extends Module {
@@ -17,8 +18,10 @@ export default class ClientTokenModule extends Module {
    */
   public async generateByCustomerId(customerId: string, merchantAccountId = super.getDefaultCurrency().account) {
     if (!customerId) { return {success: false, error: 'ValidationError'}; }
-    const token = await super.getInstance().generate({customerId, merchantAccountId});
-    return {success: true, token: token.clientToken};
+    [this.error, this.result] = await to(super.getInstance().generate({customerId, merchantAccountId}));
+    /* istanbul ignore if */
+    if (this.error) { return {success: false, error: this.error.type, message: this.error.message}; }
+    return {success: true, token: this.result.clientToken};
   }
 
   /**
