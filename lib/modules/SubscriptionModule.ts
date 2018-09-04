@@ -48,7 +48,7 @@ export default class SubscriptionModule extends Module {
    * @param {ISubscription} updatedSubscription Updated subscription details like price | planId
    * @param {string} merchantAccountId Merchant account id from braintree
    */
-  public async update(subscriptionId: string, updatedSubscription: ISubscription, merchantAccountId = this.mId) {
+  public async update(subscriptionId: string, updatedSubscription: any, merchantAccountId = this.mId) {
     updatedSubscription.merchantAccountId = merchantAccountId;
     [this.error, this.result] = await to(super.getInstance().update(subscriptionId, updatedSubscription));
     if (this.error) { return {success: false, type: this.error.type, message: this.error.message}; }
