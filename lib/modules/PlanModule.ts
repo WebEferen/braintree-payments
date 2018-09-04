@@ -22,13 +22,24 @@ export default class PlanModule extends Module {
   }
 
   /**
-   * Finds specific plan by the search object from the braintree plans
+   * Finds specific plans by the search object from the braintree plans
    * @param {object} search Search object
    */
   public async find(search: object) {
     const all = await this.all();
     const foundedPlans = _.filter(all.plans, search);
     if (foundedPlans.length > 0) { return {success: true, plans: foundedPlans as IPlan[]}; }
+    return {success: false, error: 'NotFound'};
+  }
+
+  /**
+   * Finds specific plan by the search object from the braintree plans
+   * @param {object} search Search object
+   */
+  public async findOne(search: object) {
+    const all = await this.all();
+    const foundedPlan = _.find(all.plans, search);
+    if (foundedPlan) { return {success: true, plan: foundedPlan as IPlan}; }
     return {success: false, error: 'NotFound'};
   }
 

@@ -35,8 +35,13 @@ describe('Plan', () => {
     expect(result.success).to.be.false;
   });
 
-  it('should NOT get specific plan (by search object)', async() => {
+  it('should NOT get specific plans (by search object)', async() => {
     const result = await Plan.find({id: 'INVALID_ID'});
+    expect(result.success).to.be.false;
+  });
+
+  it('should NOT get specific plan (by search object)', async() => {
+    const result = await Plan.findOne({id: 'INVALID_ID'});
     expect(result.success).to.be.false;
   });
 
@@ -55,9 +60,16 @@ describe('Plan', () => {
     expect(result.success).to.be.true;
   });
 
-  it('should get specific plan (by search object)', async() => {
+  it('should get specific plans (by search object)', async() => {
     const result = await Plan.find({currencyIsoCode: currencies[0].currency});
     expect(result.success).to.be.true;
+    expect(result.plans).to.be.an('array');
+  });
+
+  it('should get specific plan (by search object)', async() => {
+    const result = await Plan.findOne({currencyIsoCode: currencies[0].currency});
+    expect(result.success).to.be.true;
+    expect(result.plan).to.be.an('object');
   });
 
 });
