@@ -23,7 +23,7 @@ export default class PaymentMethodModule extends Module {
     if (validator.verify()) {
       [this.error, this.result] = await to(super.getInstance().create(paymentMethod));
       if (!this.error) { return this.result as IPaymentMethod; }
-      return {success: false, type: this.error.type, error: this.error.message};
+      return {success: false, error: super.parseErrorStatus(this.error)};
     }
     return {success: false, error: 'VerificationError'};
   }
@@ -34,7 +34,7 @@ export default class PaymentMethodModule extends Module {
    */
   public async find(token: string) {
     [this.error, this.result] = await to(super.getInstance().find(token));
-    if (this.error) { return {success: false, type: this.error.type, error: this.error.message}; }
+    if (this.error) { return {success: false, error: super.parseErrorStatus(this.error)}; }
     return {success: true, paymentMethod: this.result as IPaymentMethod};
   }
 

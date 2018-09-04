@@ -1,6 +1,6 @@
 {
   "name": "braintree-payments",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "Typescript Braintree Payments",
   "main": "dist/index",
   "types": "dist/index",
@@ -17,9 +17,6 @@
   },
   "engines": {
     "node": "8.9.4"
-  },
-  "nyc": {
-    "ignore-class-method": "getErrorStatus"
   },
   "repository": {
     "type": "git",
