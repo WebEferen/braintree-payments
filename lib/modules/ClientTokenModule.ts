@@ -24,7 +24,7 @@ export default class ClientTokenModule extends Module {
     if (!customerId) { return {success: false, error: 'ValidationError'}; }
     [this.error, this.result] = await to(super.getInstance().generate({customerId, merchantAccountId}));
     /* istanbul ignore if */
-    if (this.error) { return {success: false, type: this.error.type, error: this.error.message}; }
+    if (this.error) { return {success: false, error: super.parseErrorStatus(this.error)}; }
     return {success: true, token: this.result.clientToken};
   }
 

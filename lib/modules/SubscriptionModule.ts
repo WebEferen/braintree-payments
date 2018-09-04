@@ -26,7 +26,7 @@ export default class SubscriptionModule extends Module {
     if (validator.verify()) {
       [this.error, this.result] = await to(super.getInstance().create(newSubscription));
       /* istanbul ignore if */
-      if (this.error) { return {success: false, type: this.error.type, error: this.error.message}; }
+      if (this.error) { return {success: false, error: super.parseErrorStatus(this.error)}; }
       return this.result as ISubscription;
     }
     return {success: false, error: 'VerificationError'};
@@ -38,7 +38,7 @@ export default class SubscriptionModule extends Module {
    */
   public async find(subscriptionId: string) {
     [this.error, this.result] = await to(super.getInstance().find(subscriptionId));
-    if (this.error) { return {success: false, type: this.error.type, error: this.error.message}; }
+    if (this.error) { return {success: false, error: super.parseErrorStatus(this.error)}; }
     return {success: true, subscription: this.result as ISubscription};
   }
 
@@ -51,7 +51,7 @@ export default class SubscriptionModule extends Module {
   public async update(subscriptionId: string, updatedSubscription: ISubscription, merchantAccountId = this.mId) {
     updatedSubscription.merchantAccountId = merchantAccountId;
     [this.error, this.result] = await to(super.getInstance().update(subscriptionId, updatedSubscription));
-    if (this.error) { return {success: false, type: this.error.type, error: this.error.message}; }
+    if (this.error) { return {success: false, error: super.parseErrorStatus(this.error)}; }
     return {success: true, subscription: this.result as ISubscription};
   }
 
@@ -61,7 +61,7 @@ export default class SubscriptionModule extends Module {
    */
   public async cancel(subscriptionId: string) {
     [this.error, this.result] = await to(super.getInstance().cancel(subscriptionId));
-    if (this.error) { return {success: false, type: this.error.type, error: this.error.message}; }
+    if (this.error) { return {success: false, error: super.parseErrorStatus(this.error)}; }
     return {success: true};
   }
 

@@ -26,7 +26,7 @@ export default class TransactionModule extends Module {
     if (validator.verify()) {
       [this.error, this.result] = await to(super.getInstance().sale(newTransaction));
       /* istanbul ignore next */
-      if (this.error) { return {success: false, type: this.error.type, error: this.error.message}; }
+      if (this.error) { return {success: false, error: super.parseErrorStatus(this.error)}; }
       return {success: this.result.success, transaction: this.result.transaction as ITransaction};
     }
     return {success: false, error: 'VerificationFailed'};
@@ -39,7 +39,7 @@ export default class TransactionModule extends Module {
   public async find(transactionId: string) {
     [this.error, this.result] = await to(super.getInstance().find(transactionId));
     if (!this.error) { return {success: true, transaction: this.result as ITransaction}; }
-    return {success: false, type: this.error.type, error: this.error.message};
+    return {success: false, error: super.parseErrorStatus(this.error)};
   }
 
   /**
@@ -49,7 +49,7 @@ export default class TransactionModule extends Module {
   public async refund(transactionId: string) {
     [this.error, this.result] = await to(super.getInstance().refund(transactionId));
     if (!this.error) { return {success: true, transaction: this.result as ITransaction}; }
-    return {success: false, type: this.error.type, error: this.error.message};
+    return {success: false, error: super.parseErrorStatus(this.error)};
   }
 
   /**
@@ -59,6 +59,6 @@ export default class TransactionModule extends Module {
   public async cancelRelease(transactionId: string) {
     [this.error, this.result] = await to(super.getInstance().cancelRelease(transactionId));
     if (!this.error) { return {success: true, transaction: this.result as ITransaction}; }
-    return {success: false, type: this.error.type, error: this.error.message};
+    return {success: false, error: super.parseErrorStatus(this.error)};
   }
 }

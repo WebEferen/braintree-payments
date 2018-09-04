@@ -50,13 +50,25 @@ export default abstract class Module {
 
   /**
    * Get specific currency
-   * @param currency Currency short name in uppercase (eg. USD)
+   * @param {string} currency Currency short name in uppercase (eg. USD)
    * @returns Returns ICurrency object if found othervise undefined
    */
   protected getCurrency(currency: string) {
     const foundedCurrency = _.find(this.getCurrencies(), {currency});
     /* istanbul ignore next */
     return (foundedCurrency) ? foundedCurrency as ICurrency : undefined;
+  }
+
+  /**
+   * Gets error status
+   * @param {object} error Error object
+   */
+  protected parseErrorStatus(error: any) {
+    /* istanbul ignore if */
+    if (error.validators) { return error.validators; }
+    /* istanbul ignore if */
+    if (error.errors) { return error.errors; }
+    return error;
   }
 
 }
