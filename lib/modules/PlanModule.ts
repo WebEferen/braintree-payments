@@ -23,7 +23,7 @@ export default class PlanModule extends Module {
 
   /**
    * Finds specific plan in the braintree plans
-   * @param planId Plan unique index (from braintree)
+   * @param {string} planId Plan unique index (from braintree)
    */
   public async find(planId: string) {
     const all = await this.all();

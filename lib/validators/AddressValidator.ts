@@ -1,8 +1,8 @@
 import Validator from '../abstracts/Validator';
 
-export default class SubscriptionValidator extends Validator {
+export default class CustomerValidator extends Validator {
 
-  public verifyPattern = ['planId'];
+  public verifyPattern = ['streetAddress', 'postalCode', 'locality', 'region'];
 
   constructor(modelToVerify: object) {
     super(modelToVerify);

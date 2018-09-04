@@ -1,6 +1,9 @@
+import to from 'await-to-js';
 import Module from '../abstracts/Module';
 
 export default class ClientTokenModule extends Module {
+
+  private mId: string = super.getDefaultCurrency().account;
 
   /**
    * Constructor
@@ -12,12 +15,17 @@ export default class ClientTokenModule extends Module {
 
   /**
    * Generates payment token for the given customer
-   * @param customerId Customer unique id
+   * @param {string} customerId Customer unique id
+   * @param {string} merchantAccountId Merchant account id
    */
-  public async generateByCustomerId(customerId: string) {
+  public async generateByCustomerId(customerId: string, merchantAccountId = this.mId) {
+    /* istanbul ignore if */
+    if (merchantAccountId === '') { merchantAccountId = super.getDefaultCurrency().account; }
     if (!customerId) { return {success: false, error: 'ValidationError'}; }
-    const token = await super.getInstance().generate({customerId: customerId as string});
-    return {success: true, token: token.clientToken};
+    [this.error, this.result] = await to(super.getInstance().generate({customerId, merchantAccountId}));
+    /* istanbul ignore if */
+    if (this.error) { return {success: false, error: this.error.type, message: this.error.message}; }
+    return {success: true, token: this.result.clientToken};
   }
 
   /**

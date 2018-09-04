@@ -43,6 +43,17 @@ const mockups = {
     phone: '111222333444'
   },
 
+  validAddress: {
+    streetAddress: 'Some street',
+    extendedAddress: '123A',
+    firstName: 'Test',
+    lastName: 'Customer',
+    postalCode: '12 123',
+    countryCodeAlpha2: 'GB',
+    locality: 'London',
+    region: 'Greater London'
+  },
+
   validCustomer: {
     id: 'validCustomerId',
     firstName: 'John',

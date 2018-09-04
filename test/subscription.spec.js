@@ -2,6 +2,7 @@
 const chai = require('chai');
 const config = require('./config');
 const mockups = config.mockups;
+const currencies = config.currencies;
 const expect = chai.expect;
 
 const Braintree = require('../dist/index.js');
@@ -42,7 +43,7 @@ describe('Subscription', () => {
     expect(subscription.success).to.be.false;
   });
 
-  it('should create subscription', async () => {
+  it('should create subscription (default currency)', async () => {
     const subscription = await Subscription.create(mockups.validSubscription);
     if (!subscription.success) { return; }
     subscriptionId = subscription.subscription.id;
@@ -50,21 +51,49 @@ describe('Subscription', () => {
     expect(subscription.subscription).to.be.an('object');
   });
 
-  it('should find subscription', async () => {
+  it('should find subscription (default currency)', async () => {
     const subscription = await Subscription.find(subscriptionId);
     if (!subscription.success) { return; }
     expect(subscription.success).to.be.true;
     expect(subscription.subscription).to.be.an('object');
   });
 
-  it('should update subscription', async () => {
+  it('should update subscription (default currency)', async () => {
     const subscription = await Subscription.update(subscriptionId, mockups.validSubscriptionUpdate);
     if (!subscription.success) { return; }
     expect(subscription.success).to.be.true;
     expect(subscription.subscription).to.be.an('object');
   });
 
-  it('should cancel subscription', async () => {
+  it('should cancel subscription (default currency)', async () => {
+    const subscription = await Subscription.cancel(subscriptionId);
+    if (!subscription.success) { return; }
+    expect(subscription.success).to.be.true;
+  });
+
+  it('should create subscription (setted currency)', async () => {
+    const subscription = await Subscription.create(mockups.validSubscription, currencies[0].account);
+    if (!subscription.success) { return; }
+    subscriptionId = subscription.subscription.id;
+    expect(subscription.success).to.be.true;
+    expect(subscription.subscription).to.be.an('object');
+  });
+
+  it('should find subscription (setted currency)', async () => {
+    const subscription = await Subscription.find(subscriptionId);
+    if (!subscription.success) { return; }
+    expect(subscription.success).to.be.true;
+    expect(subscription.subscription).to.be.an('object');
+  });
+
+  it('should update subscription (setted currency)', async () => {
+    const subscription = await Subscription.update(subscriptionId, mockups.validSubscriptionUpdate, currencies[0].account);
+    if (!subscription.success) { return; }
+    expect(subscription.success).to.be.true;
+    expect(subscription.subscription).to.be.an('object');
+  });
+
+  it('should cancel subscription (setted currency)', async () => {
     const subscription = await Subscription.cancel(subscriptionId);
     if (!subscription.success) { return; }
     expect(subscription.success).to.be.true;

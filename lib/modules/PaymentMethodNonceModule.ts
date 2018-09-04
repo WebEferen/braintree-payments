@@ -13,11 +13,11 @@ export default class PaymentMethodNonceModule extends Module {
 
   /**
    * Creates paymentMethodNonce from the token
-   * @param paymentMethodToken Payment method unique token
+   * @param {string} paymentMethodToken Payment method unique token
    */
   public async create(paymentMethodToken: string) {
     [this.error, this.result] = await to(super.getInstance().create(paymentMethodToken));
-    if (this.error) { return {success: false, error: this.error.type}; }
+    if (this.error) { return {success: false, type: this.error.type, message: this.error.message}; }
     return this.result;
   }
 

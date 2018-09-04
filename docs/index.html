@@ -80,7 +80,7 @@
 				<pre><code class="language-javascript">npm test</code></pre>
 				<h2 id="working-with-the-bridge">Working with the bridge</h2>
 				<p>First of all we have to specify the braintree module instance and paste the configuration inside <strong>Payments</strong> constructor.</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> Payments = Braintree.Payments(configuration);</code></pre>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> Payments = Braintree.Payments(configuration, currencies, defaultCurrency = <span class="hljs-string">'EUR'</span>);</code></pre>
 				<blockquote>
 					<p>Inside configuration we will have to specify some params</p>
 				</blockquote>
@@ -90,6 +90,14 @@
   <span class="hljs-attr">publicKey</span>: <span class="hljs-string">'PublicKey'</span>,
   <span class="hljs-attr">privateKey</span>: <span class="hljs-string">'PrivateKey'</span>
 };</code></pre>
+				<blockquote>
+					<p>Inside currencies we will have to specify multiple merchant accounts for multiple currencies</p>
+				</blockquote>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> currencies = [
+  { <span class="hljs-attr">currency</span>: <span class="hljs-string">'EUR'</span>, <span class="hljs-attr">account</span>: <span class="hljs-string">'braintreeAccountIdForEur'</span> },
+  { <span class="hljs-attr">currency</span>: <span class="hljs-string">'USD'</span>, <span class="hljs-attr">account</span>: <span class="hljs-string">'braintreeAccountIdForUsd'</span> },
+  { <span class="hljs-attr">currency</span>: <span class="hljs-string">'PLN'</span>, <span class="hljs-attr">account</span>: <span class="hljs-string">'braintreeAccountIdForPln'</span> }
+];</code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -105,16 +113,13 @@
 						<a href="modules/_lib_braintree_.html">"lib/<wbr>Braintree"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_lib_helpers_environment_.html">"lib/helpers/<wbr>Environment"</a>
+						<a href="modules/_lib_abstracts_module_.html">"lib/abstracts/<wbr>Module"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_lib_helpers_module_.html">"lib/helpers/<wbr>Module"</a>
+						<a href="modules/_lib_abstracts_validator_.html">"lib/abstracts/<wbr>Validator"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_lib_helpers_simplifier_.html">"lib/helpers/<wbr>Simplifier"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_lib_helpers_validator_.html">"lib/helpers/<wbr>Validator"</a>
+						<a href="modules/_lib_helpers_environmenthelper_.html">"lib/helpers/<wbr>Environment<wbr>Helper"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_lib_interfaces_iaddon_.html">"lib/interfaces/IAdd<wbr>On"</a>
@@ -127,6 +132,9 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_lib_interfaces_iconfig_.html">"lib/interfaces/IConfig"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_interfaces_icurrency_.html">"lib/interfaces/ICurrency"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_lib_interfaces_icustomer_.html">"lib/interfaces/ICustomer"</a>
@@ -150,6 +158,9 @@
 						<a href="modules/_lib_modules_addonmodule_.html">"lib/modules/<wbr>Add<wbr>OnModule"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_modules_addressmodule_.html">"lib/modules/<wbr>Address<wbr>Module"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="modules/_lib_modules_clienttokenmodule_.html">"lib/modules/<wbr>Client<wbr>Token<wbr>Module"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -169,6 +180,9 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_lib_modules_transactionmodule_.html">"lib/modules/<wbr>Transaction<wbr>Module"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_validators_addressvalidator_.html">"lib/validators/<wbr>Address<wbr>Validator"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_lib_validators_customervalidator_.html">"lib/validators/<wbr>Customer<wbr>Validator"</a>

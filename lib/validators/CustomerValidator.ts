@@ -2,7 +2,7 @@ import Validator from '../abstracts/Validator';
 
 export default class CustomerValidator extends Validator {
 
-  public verifyPattern = ['id', 'firstName', 'lastName'];
+  public verifyPattern = ['id'];
 
   constructor(modelToVerify: object) {
     super(modelToVerify);
