@@ -25,7 +25,7 @@ export default class AddressModule extends Module {
     if (validator.verify()) {
       [this.error, this.result] = await to(super.getInstance().create(newAddress));
       /* istanbul ignore if */
-      if (this.error) { return {success: false, type: this.error.type, message: this.error.message}; }
+      if (this.error) { return {success: false, type: this.error.type, error: this.error.message}; }
       return this.result as IAddress;
     }
     return {success: false, error: 'ValidationError'};
@@ -38,7 +38,7 @@ export default class AddressModule extends Module {
    */
   public async find(customerId: string, addressId: string) {
     [this.error, this.result] = await to(super.getInstance().find(customerId, addressId));
-    if (this.error) { return {success: false, type: this.error.type, message: this.error.message}; }
+    if (this.error) { return {success: false, type: this.error.type, error: this.error.message}; }
     return {success: true, address: this.result as IAddress};
   }
 
@@ -50,7 +50,7 @@ export default class AddressModule extends Module {
    */
   public async update(customerId: string, addressId: string, updatedAddress: IAddress) {
     [this.error, this.result] = await to(super.getInstance().update(customerId, addressId, updatedAddress));
-    if (this.error) { return {success: false, type: this.error.type, message: this.error.message}; }
+    if (this.error) { return {success: false, type: this.error.type, error: this.error.message}; }
     return {success: true, address: this.result as IAddress};
   }
 
@@ -61,7 +61,7 @@ export default class AddressModule extends Module {
    */
   public async delete(customerId: string, addressId: string) {
     [this.error, this.result] = await to(super.getInstance().delete(customerId, addressId));
-    if (this.error) { return {success: false, type: this.error.type, message: this.error.message}; }
+    if (this.error) { return {success: false, type: this.error.type, error: this.error.message}; }
     return {success: true};
   }
 
