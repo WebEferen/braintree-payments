@@ -4,6 +4,7 @@ export default interface IPlan {
   description: string;
   price: number;
   billingDayOfMonth: number;
+  currency: string;
   billingFrequency: string;
   numberOfBillingCycles: string;
   currencyIsoCode: string;
