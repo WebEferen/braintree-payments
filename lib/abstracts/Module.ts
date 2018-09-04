@@ -65,7 +65,7 @@ export default abstract class Module {
    */
   protected parseErrorStatus(error: any) {
     /* istanbul ignore if */
-    if (error.validators) { return error.validators; }
+    if (error.verification) { return error.verification; }
     /* istanbul ignore if */
     if (error.errors) { return error.errors; }
     return error;
