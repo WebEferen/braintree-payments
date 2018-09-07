@@ -27,8 +27,8 @@ export default class PlanModule extends Module {
    */
   public async find(search: object) {
     const all = await this.all();
-    const foundedPlans = _.filter(all.plans, search);
-    if (foundedPlans.length > 0) { return {success: true, plans: foundedPlans as IPlan[]}; }
+    const plans = _.filter(all.plans, search);
+    if (plans.length > 0) { return {success: true, plans}; }
     return {success: false, error: 'NotFound'};
   }
 
@@ -38,8 +38,8 @@ export default class PlanModule extends Module {
    */
   public async findOne(search: object) {
     const all = await this.all();
-    const foundedPlan = _.find(all.plans, search);
-    if (foundedPlan) { return {success: true, plan: foundedPlan as IPlan}; }
+    const plan = _.find(all.plans, search);
+    if (plan) { return {success: true, plan}; }
     return {success: false, error: 'NotFound'};
   }
 
@@ -49,8 +49,8 @@ export default class PlanModule extends Module {
    */
   public async findOneById(planId: string) {
     const all = await this.all();
-    const foundedPlan = _.find(all.plans, (plan: IPlan) => plan.id === planId);
-    if (foundedPlan) { return {success: true, plan: foundedPlan as IPlan}; }
+    const plan = _.find(all.plans, (p: IPlan) => p.id === planId);
+    if (plan) { return {success: true, plan}; }
     return {success: false, error: 'NotFound'};
   }
 
@@ -60,8 +60,8 @@ export default class PlanModule extends Module {
    */
   public async findAllByCurrency(currency: string) {
     const all = await this.all();
-    const foundedPlans = _.filter(all.plans, (plan: IPlan) => plan.currencyIsoCode === currency);
-    if (foundedPlans.length > 0) { return {success: true, plans: foundedPlans as IPlan[]}; }
+    const plans = _.filter(all.plans, (plan: IPlan) => plan.currencyIsoCode === currency);
+    if (plans.length > 0) { return {success: true, plans}; }
     return {success: false, error: 'NotFound'};
   }
 
@@ -72,8 +72,8 @@ export default class PlanModule extends Module {
    */
   public async findOneByCurrency(currency: string, planId: string) {
     const all = await this.all();
-    const foundedPlan = _.find(all.plans, (plan: IPlan) => plan.currencyIsoCode === currency && plan.id === planId);
-    if (foundedPlan) { return {success: true, plan: foundedPlan as IPlan}; }
+    const plan = _.find(all.plans, (p: IPlan) => p.currencyIsoCode === currency && p.id === planId);
+    if (plan) { return {success: true, plan}; }
     return {success: false, error: 'NotFound'};
   }
 }
