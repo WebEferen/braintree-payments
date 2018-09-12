@@ -22,7 +22,7 @@ export default class CustomerModule extends Module {
     if (validator.verify()) {
       [this.error, this.result] = await to(super.getInstance().create(newCustomer));
       /* istanbul ignore if */
-      if (this.error) { return {success: false, type: this.error.type, message: this.error.message}; }
+      if (this.error) { return {success: false, error: super.parseErrorStatus(this.error)}; }
       return this.result as ICustomer;
     }
     return {success: false, error: 'ValidationError'};
@@ -35,7 +35,7 @@ export default class CustomerModule extends Module {
   public async find(customerId: string) {
     [this.error, this.result] = await to(super.getInstance().find(customerId));
     if (!this.error) { return {success: true, customer: this.result as ICustomer}; }
-    return {success: false, type: this.error.type, message: this.error.message};
+    return {success: false, error: super.parseErrorStatus(this.error)};
   }
 
   /**
@@ -46,7 +46,7 @@ export default class CustomerModule extends Module {
   public async update(customerId: string, updatedCustomer: ICustomer) {
     [this.error, this.result] = await to(super.getInstance().update(customerId, updatedCustomer));
     if (!this.error) { return {success: true, customer: this.result as ICustomer}; }
-    return {success: false, type: this.error.type, message: this.error.message};
+    return {success: false, error: super.parseErrorStatus(this.error)};
   }
 
   /**
@@ -56,6 +56,6 @@ export default class CustomerModule extends Module {
   public async delete(customerId: string) {
     [this.error, this.result] = await to(super.getInstance().delete(customerId));
     if (!this.error) { return {success: true}; }
-    return {success: false, type: this.error.type, message: this.error.message};
+    return {success: false, error: super.parseErrorStatus(this.error)};
   }
 }
