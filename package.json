@@ -35,7 +35,8 @@
     "@types/lodash": "^4.14.116",
     "@types/node": "^10.7.1",
     "rimraf": "^2.6.2",
-    "typescript": "^3.0.1"
+    "typescript": "^3.0.1",
+    "tsc": "^1.20150623.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
