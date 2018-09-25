@@ -1,6 +1,6 @@
 {
   "name": "braintree-payments",
-  "version": "3.3.3",
+  "version": "4.0.1",
   "description": "Typescript Braintree Payments",
   "main": "dist/index",
   "types": "dist/index",

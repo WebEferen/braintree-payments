@@ -1,74 +1,124 @@
-import * as _ from 'lodash';
-import ICurrency from '../interfaces/ICurrency';
+import to from 'await-to-js';
+
+// import IListOption from '../interfaces/IListOption';
+// import IOption from '../interfaces/IOption';
 
 export default abstract class Module {
 
   public error: any;
   public result: any;
-  private instance: any;
+  private model: any;
+  private sModel: any;
 
   /**
-   * Constructor
-   * @param instance Braintree instance
+   * Initialises model instance
+   * @param {any} model Current model instance
+   * @param {any} secondaryModel Secondary model if needed
    */
-  constructor(instance: any) {
-    this.instance = instance;
+  constructor(model: any, secondaryModel: any = null) {
+    this.model = model;
+    this.sModel = secondaryModel;
   }
 
   /**
-   * Gets instance
+   * Create record in the Stripe vault
+   * @param {any} creationObject Object with creation details
    */
-  protected getInstance() {
-    return this.instance;
+  public async create(creationObject: any) {
+    return this.call(this.instance().create(creationObject));
   }
 
   /**
-   * Gets currencies object
+   * Finds record based for the specific index key
+   * @param {string} findingId Unique finding index
+   * istanbul ignore next
    */
-  protected getCurrencies() {
-    return this.getConfig().currencies as ICurrency[];
+  public async retrieve(findingId: string) {
+    return this.call(this.instance().find(findingId));
   }
 
   /**
-   * Gets config object
+   * Update specific record in the Stripe vault
+   * @param {string} findingId Unique finding index
+   * @param {any} updatedObject Object with update details
    */
-  protected getConfig() {
-    return this.getInstance().config;
+  public async update(findingId: string, updatedObject: any) {
+    return this.call(this.instance().update(findingId, updatedObject));
   }
 
   /**
-   * Gets default currency account
+   * Deletes customer / invoice from the Stripes vault
+   * @param {string} findingId Unique finding index
    */
-  protected getDefaultCurrency() {
-    const currency = this.getConfig().defaultCurrency;
-    const foundedCurrency = this.getCurrency(currency);
+  public async delete(findingId: string) {
+    return this.call(this.instance().delete(findingId));
+  }
+
+  /**
+   * List records from the Stripe model
+   */
+  public async list() {
     /* istanbul ignore next */
-    if (foundedCurrency) { return foundedCurrency as ICurrency; }
-    /* istanbul ignore next */
-    return this.getCurrencies()[0] as ICurrency;
+    return this.call(this.instance().all());
   }
 
   /**
-   * Get specific currency
-   * @param {string} currency Currency short name in uppercase (eg. USD)
-   * @returns Returns ICurrency object if found othervise undefined
+   * Method caller
+   * @param {any} method Method async
    */
-  protected getCurrency(currency: string) {
-    const foundedCurrency = _.find(this.getCurrencies(), {currency});
-    /* istanbul ignore next */
-    return (foundedCurrency) ? foundedCurrency as ICurrency : undefined;
+  protected async call(method: any) {
+    [this.error, this.result] = await to(method);
+    this.error = this.catchUnexpectedError(this.result);
+    return (this.error) ? this.error : this.result;
   }
 
   /**
-   * Gets error status
-   * @param {object} error Error object
+   * Instance getter
+   * @param {boolean} secondaryModel Gets secondary model instance if needed
    */
-  protected parseErrorStatus(error: any) {
-    /* istanbul ignore if */
-    if (error.verification) { return error.verification; }
-    /* istanbul ignore if */
-    if (error.errors) { return error.errors; }
-    return error;
+  protected instance(secondaryModel: boolean = false) {
+    return (secondaryModel) ? this.sModel : this.model;
   }
 
+  /**
+   * Gets query result
+   * @param {string} deeperObject If needed go deeper
+   */
+  protected getResult(deeperObject: string = '') {
+    return (deeperObject.length === 0) ? this.result : this.result[deeperObject];
+  }
+
+  /**
+   * Error checker
+   */
+  protected isError() {
+    return (this.error) ? true : false;
+  }
+
+  /**
+   * Error getter
+   */
+  protected getError() {
+    return this.parseResponse(this.error);
+  }
+
+  /**
+   * Error handler
+   * @param error Error response
+   */
+  private catchUnexpectedError(error: any) {
+    if (error !== undefined && error.errors) { return error; }
+    return this.error;
+  }
+
+  /**
+   * Response error parser
+   * @param {any} error Error object
+   */
+  private parseResponse(error: any) {
+    const errors = error.errors;
+    const message = error.message;
+    const verification = error.verification;
+    return (verification) ? verification : message;
+  }
 }

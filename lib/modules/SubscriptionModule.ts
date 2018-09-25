@@ -1,68 +1,59 @@
-import {to} from 'await-to-js';
 import Module from '../abstracts/Module';
-import ISubscription from '../interfaces/ISubscription';
 import SubscriptionValidator from '../validators/SubscriptionValidator';
 
-export default class SubscriptionModule extends Module {
+import ISubscription from '../interfaces/ISubscription';
 
-  private mId: string = super.getDefaultCurrency().account;
+export default class SubscriptionModule extends Module {
 
   /**
    * Constructor
    * @param {object} instance Braintree subscription instance
    */
-  constructor(instance: any) {
-    super(instance);
-  }
+  constructor(instance: any) { super(instance); }
 
   /**
-   * Creates a subscription for the braintree
-   * @param {ISubscription} newSubscription Subscription object
-   * @param {string} merchantAccountId Merchant account id from braintree
+   * Creates new subscription
+   * @param {ISubscription} subscription New subscription object
    */
-  public async create(newSubscription: ISubscription, merchantAccountId = this.mId) {
-    newSubscription.merchantAccountId = merchantAccountId;
-    const validator = new SubscriptionValidator(newSubscription);
-    if (validator.verify()) {
-      [this.error, this.result] = await to(super.getInstance().create(newSubscription));
-      /* istanbul ignore if */
-      if (this.error) { return {success: false, error: super.parseErrorStatus(this.error)}; }
-      return this.result as ISubscription;
+  public async create(subscription: ISubscription) {
+    const validator = new SubscriptionValidator(subscription);
+    if (validator.isOk()) {
+      await super.create(subscription);
+      if (super.isError()) { return {success: false, error: super.getError()}; }
+      return {success: true, subscription: super.getResult('subscription') as ISubscription};
     }
     return {success: false, error: 'VerificationError'};
   }
 
   /**
-   * Finds specific subscription from the braintree database
+   * Retrieve subscription from the Braintree vault
    * @param {string} subscriptionId Subscription unique index
    */
-  public async find(subscriptionId: string) {
-    [this.error, this.result] = await to(super.getInstance().find(subscriptionId));
-    if (this.error) { return {success: false, error: super.parseErrorStatus(this.error)}; }
-    return {success: true, subscription: this.result as ISubscription};
+  public async retrieve(subscriptionId: string) {
+    await super.retrieve(subscriptionId);
+    if (super.isError()) { return {success: false, error: super.getError()}; }
+    return {success: true, subscription: super.getResult('subscription') as ISubscription};
   }
 
   /**
-   * Updates specific subscription
+   * Update subscription in the Braintree vault
    * @param {string} subscriptionId Subscription unique index
-   * @param {ISubscription} updatedSubscription Updated subscription details like price | planId
-   * @param {string} merchantAccountId Merchant account id from braintree
+   * @param {ISubscription} updatedObject Update for the subscription
    */
-  public async update(subscriptionId: string, updatedSubscription: ISubscription, merchantAccountId = this.mId) {
-    updatedSubscription.merchantAccountId = merchantAccountId;
-    [this.error, this.result] = await to(super.getInstance().update(subscriptionId, updatedSubscription));
-    if (this.error) { return {success: false, error: super.parseErrorStatus(this.error)}; }
-    return {success: true, subscription: this.result as ISubscription};
+  public async update(subscriptionId: string, updatedObject: ISubscription) {
+    await super.update(subscriptionId, updatedObject);
+    if (super.isError()) { return {success: false, error: super.getError()}; }
+    return {success: true, subscription: super.getResult('subscription') as ISubscription};
   }
 
   /**
-   * Cancels specific subscription
+   * Deletes subscription from the Braintree vault
    * @param {string} subscriptionId Subscription unique index
    */
-  public async cancel(subscriptionId: string) {
-    [this.error, this.result] = await to(super.getInstance().cancel(subscriptionId));
-    if (this.error) { return {success: false, error: super.parseErrorStatus(this.error)}; }
-    return {success: true};
+  public async delete(subscriptionId: string) {
+    await super.call(super.instance().cancel(subscriptionId));
+    if (super.isError()) { return {success: false, error: super.getError()}; }
+    return {success: true, subscription: {deleted: true}};
   }
 
 }

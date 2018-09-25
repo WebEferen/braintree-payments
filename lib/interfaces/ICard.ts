@@ -23,7 +23,7 @@ export default interface ICard {
   expirationDate: string;
   expirationYear: string;
   subscriptions: ISubscription[];
-  verification: object[]; // TO MOVE INTO ICardVerification
+  verification: object[];
   issuingBank: string;
   healthcare: string;
   imageUrl: string;

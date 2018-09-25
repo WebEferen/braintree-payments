@@ -1,6 +1,6 @@
 export default interface IConfig {
-  merchantId: string;
-  environment: any;
-  publicKey: string;
-  privateKey: string;
+  private_key: string;
+  public_key: string;
+  merchant_id: string;
+  environment: string;
 }
