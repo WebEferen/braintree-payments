@@ -1,6 +1,6 @@
 {
   "name": "braintree-payments",
-  "version": "3.3.2",
+  "version": "3.3.3",
   "description": "Typescript Braintree Payments",
   "main": "dist/index",
   "types": "dist/index",
@@ -11,7 +11,7 @@
     "documentation": "./node_modules/.bin/typedoc --out docs --exclude node_modules",
     "nyc": "./node_modules/.bin/nyc --reporter=html --reporter=text",
     "clear": "./node_modules/.bin/rimraf",
-    "build": "./node_modules/.bin/tsc",
+    "build": "./node_modules/.bin/ntsc",
     "test": "npm run clear ./dist && npm run build && npm run mocha",
     "test-coverage": "npm run nyc npm run test || exit 0"
   },
@@ -35,7 +35,8 @@
     "@types/lodash": "^4.14.116",
     "@types/node": "^10.7.1",
     "rimraf": "^2.6.2",
-    "typescript": "^3.0.1"
+    "typescript": "^3.0.1",
+    "ntypescript": "1.201706190042.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",
