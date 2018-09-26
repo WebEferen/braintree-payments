@@ -58,7 +58,6 @@ export default abstract class Module {
    * List records from the Stripe model
    */
   public async list() {
-    /* istanbul ignore next */
     return this.call(this.instance().all());
   }
 
@@ -116,7 +115,6 @@ export default abstract class Module {
    * @param {any} error Error object
    */
   private parseResponse(error: any) {
-    const errors = error.errors;
     const message = error.message;
     const verification = error.verification;
     return (verification) ? verification : message;

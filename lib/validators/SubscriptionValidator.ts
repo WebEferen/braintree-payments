@@ -2,7 +2,7 @@ import Validator from '../abstracts/Validator';
 
 export default class SubscriptionValidator extends Validator {
 
-  public verifyPattern = ['planId'];
+  public verifyPattern = ['planId', 'paymentMethodToken'];
 
   /**
    * Model pattern constructor

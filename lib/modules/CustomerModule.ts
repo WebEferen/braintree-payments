@@ -24,6 +24,7 @@ export default class CustomerModule extends Module {
     const validator = new CustomerValidator(customerDetails);
     if (validator.isOk()) {
       await super.create(customerDetails);
+      /* istanbul ignore if */
       if (super.isError()) { return {success: false, error: super.getError()}; }
       return {success: true, customer: super.getResult('customer') as ICustomer};
     }

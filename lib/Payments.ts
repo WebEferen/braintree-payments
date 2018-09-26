@@ -42,21 +42,21 @@ export default class Payments {
      * Subscriptions model
      */
     public subscriptions() {
-        // return new SubscriptionModule(this.provider.subscription);
+        return new SubscriptionModule(this.provider.subscription);
     }
 
     /**
      * Plans model
      */
     public plans() {
-        // return new PlanModule(this.provider.plan);
+        return new PlanModule(this.provider.plan);
     }
 
     /**
      * Addons model
      */
     public products() {
-        // return new AddOnModule(this.provider.addOn);
+        return new AddOnModule(this.provider.addOn);
     }
 
     /**

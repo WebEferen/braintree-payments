@@ -32,7 +32,7 @@ export default class SubscriptionModule extends Module {
   public async retrieve(subscriptionId: string) {
     await super.retrieve(subscriptionId);
     if (super.isError()) { return {success: false, error: super.getError()}; }
-    return {success: true, subscription: super.getResult('subscription') as ISubscription};
+    return {success: true, subscription: super.getResult() as ISubscription};
   }
 
   /**

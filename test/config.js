@@ -39,7 +39,19 @@ const mockups = {
     invalid: {
       paymentMethodNonce: 'fake-processor-declined-visa-nonce'
     }
-  }
+  },
+
+  subscription: {
+    valid: {
+      planId: 'basicAnalyticsPlan',
+    },
+    invalid: {
+      planId: 'someNotExistingPlan'
+    }
+  },
+
+  product: 'growthModeler',
+  plan: 'basicAnalyticsPlan'
   
 };
 
