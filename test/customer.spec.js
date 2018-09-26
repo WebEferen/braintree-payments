@@ -50,8 +50,15 @@ describe('Customer', () => {
     expect(result.success).to.be.true;
   });
 
-  it('should generate customer token', async () => {
+  it('should generate customer token (w/id)', async () => {
     const result = await tokens.generate(customer.id);
+    if (result.error) { return; }
+    expect(result.success).to.be.true;
+    expect(result.token).to.be.an('string');
+  });
+
+  it('should generate customer token', async () => {
+    const result = await tokens.generate();
     if (result.error) { return; }
     expect(result.success).to.be.true;
     expect(result.token).to.be.an('string');

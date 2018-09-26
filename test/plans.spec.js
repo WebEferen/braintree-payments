@@ -21,4 +21,10 @@ describe('Plans', () => {
     expect(result.plan.id).to.be.equal(mockups.plan);
   });
 
+  it('should NOT get specific plan', async() => {
+    const result = await plans.retrieve('invalidPlan');
+    expect(result.success).to.be.false;
+    expect(result.error).to.be.equal('NotFound');
+  });
+
 });

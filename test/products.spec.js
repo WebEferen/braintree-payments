@@ -21,4 +21,10 @@ describe('Products (addons)', () => {
     expect(result.addon.id).to.be.equal(mockups.product);
   });
 
+  it('should NOT get specific product (addon)', async() => {
+    const result = await products.retrieve('invalidAddon');
+    expect(result.success).to.be.false;
+    expect(result.error).to.be.equal('NotFound');
+  });
+
 });

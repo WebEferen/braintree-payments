@@ -19,6 +19,7 @@ export default class SubscriptionModule extends Module {
     const validator = new SubscriptionValidator(subscription);
     if (validator.isOk()) {
       await super.create(subscription);
+      /* istanbul ignore next */
       if (super.isError()) { return {success: false, error: super.getError()}; }
       return {success: true, subscription: super.getResult('subscription') as ISubscription};
     }

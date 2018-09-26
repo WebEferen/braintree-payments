@@ -17,7 +17,7 @@ export default class ClientTokenModule extends Module {
     (customerId.length !== 0) ?
       await super.call(super.instance().generate()) :
       await super.call(super.instance().generate({customerId}));
-
+    /* istanbul ignore next */
     if (super.isError()) { return {success: false, error: super.getError()}; }
     return {success: true, token: super.getResult('clientToken')};
   }
