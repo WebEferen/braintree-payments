@@ -1,4 +1,3 @@
-import to from 'await-to-js';
 import Module from '../abstracts/Module';
 import ICustomer from '../interfaces/ICustomer';
 import CustomerValidator from '../validators/CustomerValidator';

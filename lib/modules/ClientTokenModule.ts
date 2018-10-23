@@ -1,4 +1,3 @@
-import to from 'await-to-js';
 import Module from '../abstracts/Module';
 
 export default class ClientTokenModule extends Module {
