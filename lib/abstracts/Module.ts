@@ -1,8 +1,3 @@
-import to from 'await-to-js';
-
-// import IListOption from '../interfaces/IListOption';
-// import IOption from '../interfaces/IOption';
-
 export default abstract class Module {
 
   public error: any;
@@ -66,7 +61,7 @@ export default abstract class Module {
    * @param {any} method Method async
    */
   protected async call(method: any) {
-    [this.error, this.result] = await to(method);
+    [this.error, this.result] = await this.to(method);
     this.error = this.catchUnexpectedError(this.result);
     return (this.error) ? this.error : this.result;
   }
@@ -118,5 +113,13 @@ export default abstract class Module {
     const message = error.message;
     const verification = error.verification;
     return (verification) ? verification : message;
+  }
+
+  /**
+   * Promise like object resolver
+   * @param {Promise} promisable Promise like object
+   */
+  private to(promisable: Promise<any>) {
+    return promisable.then((res) => [null, res]).catch((err) => [err, null]);
   }
 }
