@@ -1,30 +1,28 @@
 'use strict';
-const expect = require('chai').expect;
-const Braintree = require('../dist/index.js');
+const chai = require('chai');
+const expect = chai.expect;
 
-describe('Braintree Environment', () => {
-  it('should NOT get braintree environment', () => {
-    const braintreeEnvironment = Braintree.Environment('test');
-    expect(braintreeEnvironment).to.be.null;
+const environment = require('../dist/lib/helpers/EnvironmentHelper').default;
+
+describe('Environment Helper', () => {
+
+  it('should get Sandbox environment', () => {
+    expect(environment.get('Sandbox')).not.to.be.undefined;
   });
 
-  it('should get sandbox braintree environment', () => {
-    const braintreeEnvironment = Braintree.Environment('Sandbox');
-    expect(braintreeEnvironment).to.be.an('object');
+  it('should get Qa environment', () => {
+    expect(environment.get('Qa')).not.to.be.undefined;
   });
 
-  it('should get qa braintree environment', () => {
-    const braintreeEnvironment = Braintree.Environment('Qa');
-    expect(braintreeEnvironment).to.be.an('object');
+  it('should get Development environment', () => {
+    expect(environment.get('Development')).not.to.be.undefined;
   });
 
-  it('should get development braintree environment', () => {
-    const braintreeEnvironment = Braintree.Environment('Development');
-    expect(braintreeEnvironment).to.be.an('object');
+  it('should get Production environment', () => {
+    expect(environment.get('Production')).not.to.be.undefined;
   });
 
-  it('should get production braintree environment', () => {
-    const braintreeEnvironment = Braintree.Environment('Production');
-    expect(braintreeEnvironment).to.be.an('object');
+  it('should NOT get Unknown environment', () => {
+    expect(environment.get('Unknown')).to.be.null;
   });
 });

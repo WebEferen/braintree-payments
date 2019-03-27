@@ -13,21 +13,21 @@ export default class AddOnModule extends Module {
   }
 
   /**
-   * Gets all of the addons from the braintree
+   * Retrieve list of an addons from the Braintree vault
    */
-  public async all() {
-    const addOnsCollection = await super.getInstance().all();
-    return addOnsCollection;
+  public async list() {
+    await super.list();
+    return {success: true, addons: super.getResult('addOns')};
   }
 
   /**
    * Finds specific addon in the braintree addons
    * @param {string} addonId Addon unique index (from braintree)
    */
-  public async find(addonId: string) {
-    const all = await this.all();
-    const foundedAddon = _.find(all.addOns, (addOn: IAddOn) => addOn.id === addonId);
-    if (foundedAddon) { return {success: true, addOn: foundedAddon as IAddOn}; }
+  public async retrieve(addonId: string) {
+    const all = await this.list();
+    const foundedAddon = _.find(all.addons, (addon: IAddOn) => addon.id === addonId);
+    if (foundedAddon) { return {success: true, addon: foundedAddon as IAddOn}; }
     return {success: false, error: 'NotFound'};
   }
 

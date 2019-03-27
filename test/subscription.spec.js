@@ -2,101 +2,86 @@
 const chai = require('chai');
 const config = require('./config');
 const mockups = config.mockups;
-const currencies = config.currencies;
 const expect = chai.expect;
 
-const Braintree = require('../dist/index.js');
-const Payments = Braintree.Payments(config.payments, config.currencies, 'EUR');
-const Subscription = Payments.getModule('subscription');
+const payments = require('../dist').payments(config.payments);
+const customers = payments.customers();
+const subscriptions = payments.subscriptions();
 
-let subscriptionId;
+const customer = {id: '', card: {token: ''}};
+const subscription = {id: ''};
 
 describe('Subscription', () => {
 
-  it('should be a module', () => {
-    expect(Subscription).to.be.instanceof(Object);
+  it('should create braintree customer', async () => {
+    const result = await customers.create(mockups.customer.valid);
+    expect(result.success).to.be.true;
+    customer.id = result.customer.id;
   });
 
-  it('should NOT create subscription (empty)', async () => {
-    const subscription = await Subscription.create({});
-    expect(subscription.success).to.be.false;
-    expect(subscription.error).to.be.equal('VerificationError');
+  it('should attach card', async() => {
+    const result = await customers.attachCard(customer.id, mockups.card.valid.paymentMethodNonce);
+    expect(result.success).to.be.true;
+    expect(result.card.cardType).to.be.equal('Visa');
+    customer.card.token = result.card.token;
   });
 
-  it('should NOT create subscription (exists)', async () => {
-    const subscription = await Subscription.create(mockups.invalidSubscription);
-    expect(subscription.success).to.be.false;
+  it('should NOT create subscription', async() => {
+    const createObject = {planId: mockups.subscription.invalid.planId};
+    const result = await subscriptions.create(createObject);
+    expect(result.success).to.be.false;
   });
 
-  it('should NOT find subscription', async () => {
-    const subscription = await Subscription.find(mockups.invalidSubscriptionId);
-    expect(subscription.success).to.be.false;
+  it('should NOT retrieve subscription', async() => {
+    const result = await subscriptions.retrieve('invalidSubscriptionId');
+    expect(result.success).to.be.false;
   });
 
-  it('should NOT update subscription', async () => {
-    const subscription = await Subscription.update(mockups.invalidSubscriptionId, mockups.validSubscriptionUpdate);
-    expect(subscription.success).to.be.false;
+  it('should NOT update subscription', async() => {
+    const updatedObject = {planId: mockups.subscription.valid.planId};
+    const result = await subscriptions.update('invalidSubscriptionId', updatedObject);
+    expect(result.success).to.be.false;
   });
 
-  it('should NOT cancel subscription', async () => {
-    const subscription = await Subscription.cancel(mockups.invalidSubscriptionId);
-    expect(subscription.success).to.be.false;
+  it('should NOT cancel subscription', async() => {
+    const result = await subscriptions.delete('invalidSubscriptionId');
+    expect(result.success).to.be.false;
   });
 
-  it('should create subscription (default currency)', async () => {
-    const subscription = await Subscription.create(mockups.validSubscription);
-    if (!subscription.success) { return; }
-    subscriptionId = subscription.subscription.id;
-    expect(subscription.success).to.be.true;
-    expect(subscription.subscription).to.be.an('object');
+  it('should create subscription', async() => {
+    const createObject = {planId: mockups.subscription.valid.planId};
+    createObject.paymentMethodToken = customer.card.token;
+
+    const result = await subscriptions.create(createObject);
+    subscription.id = result.subscription.id;
+    expect(result.success).to.be.true;
+    expect(result.subscription.id).to.be.an('string');
   });
 
-  it('should find subscription (default currency)', async () => {
-    const subscription = await Subscription.find(subscriptionId);
-    if (!subscription.success) { return; }
-    expect(subscription.success).to.be.true;
-    expect(subscription.subscription).to.be.an('object');
+  it('should retrieve subscription', async() => {
+    const result = await subscriptions.retrieve(subscription.id);
+    expect(result.success).to.be.true;
+    expect(result.subscription.id).to.be.equal(subscription.id);
   });
 
-  it('should update subscription (default currency)', async () => {
-    const subscription = await Subscription.update(subscriptionId, mockups.validSubscriptionUpdate);
-    if (!subscription.success) { return; }
-    expect(subscription.success).to.be.true;
-    expect(subscription.subscription).to.be.an('object');
+  it('should update subscription', async() => {
+    const updatedObject = {price: '100.00'};
+    const result = await subscriptions.update(subscription.id, updatedObject);
+    expect(result.success).to.be.true;
+    expect(result.subscription.price).to.be.equal('100.00');
+    expect(result.subscription.id).to.be.equal(subscription.id);
   });
 
-  it('should cancel subscription (default currency)', async () => {
-    const subscription = await Subscription.cancel(subscriptionId);
-    if (!subscription.success) { return; }
-    expect(subscription.success).to.be.true;
+  it('should cancel subscription', async() => {
+    const result = await subscriptions.delete(subscription.id);
+    expect(result.success).to.be.true;
+    expect(result.subscription.deleted).to.be.true;
   });
 
-  it('should create subscription (setted currency)', async () => {
-    const subscription = await Subscription.create(mockups.validSubscription, currencies[0].account);
-    if (!subscription.success) { return; }
-    subscriptionId = subscription.subscription.id;
-    expect(subscription.success).to.be.true;
-    expect(subscription.subscription).to.be.an('object');
-  });
-
-  it('should find subscription (setted currency)', async () => {
-    const subscription = await Subscription.find(subscriptionId);
-    if (!subscription.success) { return; }
-    expect(subscription.success).to.be.true;
-    expect(subscription.subscription).to.be.an('object');
-  });
-
-  it('should update subscription (setted currency)', async () => {
-    const subscription = await Subscription.update(subscriptionId, mockups.validSubscriptionUpdate, currencies[0].account);
-    if (!subscription.success) { return; }
-    expect(subscription.success).to.be.true;
-    expect(subscription.subscription).to.be.an('object');
-  });
-
-  it('should cancel subscription (setted currency)', async () => {
-    const subscription = await Subscription.cancel(subscriptionId);
-    if (!subscription.success) { return; }
-    expect(subscription.success).to.be.true;
+  it('should delete braintree customer', async () => {
+    const result = await customers.delete(customer.id);
+    expect(result.success).to.be.true;
+    expect(result.customer.deleted).to.be.true;
   });
 
 });
