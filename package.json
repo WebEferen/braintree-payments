@@ -1,7 +1,8 @@
 {
   "name": "braintree-payments",
-  "version": "4.2.3",
+  "version": "4.2.4",
   "description": "Typescript Braintree Payments",
+  "keywords": ["typescript", "braintree", "payments", "express", "ts", "bt", "module"],
   "main": "dist/index",
   "types": "dist/index",
   "scripts": {
@@ -20,14 +21,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/WebEferen/braintree-payments.git"
+    "url": "git+ssh://git@github.com/WebEferen/braintree-payments.git"
   },
   "author": "Mike Makowski",
   "license": "ISC",
   "bugs": {
-    "url": "https://gitlab.com/WebEferen/braintree-payments/issues"
+    "url": "https://github.com/WebEferen/braintree-payments/issues"
   },
-  "homepage": "https://gitlab.com/WebEferen/braintree-payments#README",
+  "homepage": "https://github.com/WebEferen/braintree-payments#README",
   "dependencies": {
     "braintree": "^2.12.0",
     "lodash": "^4.17.10",
